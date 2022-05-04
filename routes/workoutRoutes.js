@@ -1,5 +1,4 @@
 const express = require("express");
-const res = require("express/lib/response");
 const workoutRouter = new express.Router();
 
 const workoutClass = require("../model/workout");
