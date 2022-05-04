@@ -8,7 +8,8 @@ const workout = new workoutClass();
 workoutRouter.get("/", async (req, res) => {
   const results = await workout.getAllWorkouts(
     req.query.category,
-    req.query.muscles
+    req.query.muscles,
+    req.query.name
   );
   return res.json(results);
 });

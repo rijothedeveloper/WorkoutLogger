@@ -1,6 +1,6 @@
 const db = require("../db");
 class Workout {
-  async getAllWorkouts(category, muscles) {
+  async getAllWorkouts(category, muscles, name) {
     let filter = false;
     let query = "SELECT * FROM workout";
     if (category) {
@@ -13,9 +13,20 @@ class Workout {
     if (muscles) {
       if (!filter) {
         query = query + " where";
+      } else {
+        query += " AND";
       }
       filter = true;
       query += ` muscles = ${await this.getMuscleId(muscles)}`;
+    }
+    if (name) {
+      if (!filter) {
+        query = query + " where";
+      } else {
+        query += " AND";
+      }
+      filter = true;
+      query += ` name LIKE '%${name}%'`;
     }
     const results = await db.query(query);
     return results.rows;
