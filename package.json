@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/rijothedeveloper/WorkoutLogger#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "supertest": "^6.2.3"
   }
 }
