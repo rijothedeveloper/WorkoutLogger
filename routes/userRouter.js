@@ -7,7 +7,7 @@ userRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const result = await user.registerUser(username, password);
-    return res.json(result);
+    return res.status(201).json(result);
   } catch (error) {
     const customError = new ExpressError(
       400,
