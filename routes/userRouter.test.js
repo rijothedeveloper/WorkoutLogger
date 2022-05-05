@@ -8,7 +8,7 @@ const app = require("../app");
 beforeEach(async function () {
   await request(app)
     .post("/user/register")
-    .send({ username: "rijo", password: "poopoo" });
+    .send({ username: "rijo1", password: "poopoo" });
 });
 
 afterEach(async function () {
@@ -23,10 +23,10 @@ describe("/user/register", () => {
   test("register a new user", async function () {
     const resp = await request(app)
       .post("/user/register")
-      .send({ username: "george", password: "zoozoo" });
+      .send({ username: "george1", password: "zoozoo" });
     expect(resp.statusCode).toBe(201);
     expect(resp.body).toEqual({
-      username: "george",
+      username: "george1",
     });
   });
 });
@@ -34,8 +34,8 @@ describe("/user/register", () => {
 describe("/user/login", () => {
   test("login user", async () => {
     const resp = await request(app)
-      .get("/user/login")
-      .send({ username: "rijo", password: "poopoo" });
+      .post("/user/login")
+      .send({ username: "rijo1", password: "poopoo" });
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toEqual({
       message: "Logged in!",

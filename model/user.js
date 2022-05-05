@@ -1,5 +1,7 @@
 const db = require("../db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const jwt_secret = "its a secret";
 
 async function registerUser(username, password) {
   const BCRYPT_WORK_FACTOR = 12;
@@ -18,7 +20,10 @@ async function loginUser(username, password) {
   const user = result.rows[0];
   if (user) {
     if ((await bcrypt.compare(password, user.password)) === true) {
-      return { message: "Logged in!" };
+      const payload = { username: user.username };
+      const JWT_OPTIONS = { expiresIn: 60 * 60 };
+      const token = jwt.sign(payload, jwt_secret, JWT_OPTIONS);
+      return { token };
     } else {
       throw new ExpressError("Invalid user/password", 400);
     }
