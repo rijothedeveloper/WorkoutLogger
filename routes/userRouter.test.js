@@ -37,8 +37,6 @@ describe("/user/login", () => {
       .post("/user/login")
       .send({ username: "rijo1", password: "poopoo" });
     expect(resp.statusCode).toBe(200);
-    expect(resp.body).toEqual({
-      message: "Logged in!",
-    });
+    expect(resp.body.token).toBeDefined();
   });
 });
