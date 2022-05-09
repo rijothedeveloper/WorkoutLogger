@@ -19,9 +19,9 @@ async function loginUser(username, password) {
   const user = result.rows[0];
   if (user) {
     if ((await bcrypt.compare(password, user.password)) === true) {
-      const payload = { username: user.username };
-      const token = jwt.sign(payload, jwt_secret, JWT_OPTIONS);
-      return { token };
+      // const payload = { username: user.username };
+      // const token = jwt.sign(payload, jwt_secret, JWT_OPTIONS);
+      return user;
     } else {
       throw new ExpressError("Invalid user/password", 400);
     }

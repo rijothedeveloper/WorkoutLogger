@@ -1,9 +1,10 @@
 const express = require("express");
 const userRouter = new express.Router();
-const user = require("../model/user");
+const users = require("../model/user");
 const ExpressError = require("../expressError");
 const jsonschema = require("jsonschema");
 const loginRegisterSchems = require("../schemas/loginRegister.json");
+const createToken = require("../helpers/tokens");
 
 userRouter.post("/register", async (req, res, next) => {
   const validity = jsonschema.validate(req.body, loginRegisterSchems);
@@ -14,7 +15,7 @@ userRouter.post("/register", async (req, res, next) => {
   }
   try {
     const { username, password } = req.body;
-    const result = await user.registerUser(username, password);
+    const result = await users.registerUser(username, password);
     return res.status(201).json(result);
   } catch (error) {
     const customError = new ExpressError(
@@ -28,12 +29,15 @@ userRouter.post("/register", async (req, res, next) => {
 userRouter.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const result = await user.loginUser(username, password);
-    return res.json(result);
+    const user = await users.loginUser(username, password);
+    if (user) {
+      const token = createToken(user);
+      return res.json({ token });
+    }
   } catch (err) {
     const customError = new ExpressError(
       400,
-      "error in username and password  " + err
+      "error in username and password field required " + err
     );
     return next(customError);
   }
