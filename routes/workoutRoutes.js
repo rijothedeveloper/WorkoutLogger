@@ -6,6 +6,9 @@ const { ensureLoggedIn } = require("../middleware/auth");
 const workoutClass = require("../model/workout");
 const workout = new workoutClass();
 
+const jsonSchema = require("jsonschema");
+const planSchema = require("../schemas/planschema.json");
+
 workoutRouter.get("/", ensureLoggedIn, async (req, res) => {
   const results = await workout.getAllWorkouts(
     req.query.category,
@@ -16,6 +19,12 @@ workoutRouter.get("/", ensureLoggedIn, async (req, res) => {
 });
 
 workoutRouter.post("/plan", ensureLoggedIn, async (req, res, next) => {
+  const inputValidity = jsonSchema.validate(req.body, planSchema);
+  if (!inputValidity.valid) {
+    const listOfErrors = inputValidity.errors.map((error) => error.stack);
+    const expressError = new ExpressError(406, listOfErrors);
+    return next(expressError);
+  }
   const data = {
     name: req.body.name,
     notes: req.body.notes,
