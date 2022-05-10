@@ -53,6 +53,32 @@ class Workout {
     const muscleId = muscleresults.rows[0].id;
     return muscleId;
   }
+
+  async addPlan(plan) {
+    const result = await db.query(
+      "INSERT INTO plans (name, notes, username, sun, mon, tue, wed, thu, fri, sat) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id",
+      [
+        plan.name,
+        plan.notes,
+        plan.username,
+        plan.sun,
+        plan.mon,
+        plan.tue,
+        plan.wed,
+        plan.thu,
+        plan.fri,
+        plan.sun,
+      ]
+    );
+    const planId = result.rows[0].id;
+    for (let workoutId of plan.workouts) {
+      const result = await db.query(
+        "INSERT INTO plan_workouts (planid, workoutid) values ($1, $2)",
+        [planId, workoutId]
+      );
+    }
+    return true;
+  }
 }
 
 module.exports = Workout;

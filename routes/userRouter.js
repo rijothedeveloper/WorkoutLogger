@@ -27,6 +27,12 @@ userRouter.post("/register", async (req, res, next) => {
 });
 
 userRouter.post("/login", async (req, res, next) => {
+  const validity = jsonschema.validate(req.body, loginRegisterSchems);
+  if (!validity.valid) {
+    const listOfErrors = validity.errors.map((error) => error.stack);
+    const expressError = new ExpressError(400, listOfErrors);
+    return next(expressError);
+  }
   try {
     const { username, password } = req.body;
     const user = await users.loginUser(username, password);
