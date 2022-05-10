@@ -47,8 +47,35 @@ describe("GET /workout", function () {
   });
 });
 
+describe("POST /plan", function () {
+  test("add a plan successfully", async () => {
+    const resp = await request(app)
+      .post("/workouts/plan")
+      .send({
+        token: testUserToken,
+        name: "lowebody",
+        notes: "lowerbody program",
+        sun: true,
+        mon: false,
+        tue: true,
+        wed: false,
+        thu: true,
+        fri: false,
+        sat: false,
+        workouts: [1, 2],
+      });
+    expect(resp.statusCode).toBe(200);
+    expect(resp.body).toEqual({
+      result: "success",
+    });
+  });
+});
+
 afterEach(async function () {
   await db.query("DELETE FROM workout");
+  await db.query("DELETE FROM plan_workouts");
+  await db.query("DELETE FROM plans");
+  await db.query("DELETE FROM users");
 });
 afterAll(async () => {
   await db.end();
