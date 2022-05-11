@@ -52,4 +52,27 @@ workoutRouter.post("/plan", ensureLoggedIn, async (req, res, next) => {
   }
 });
 
+workoutRouter.get("/plan", ensureLoggedIn, async (req, res, next) => {
+  try {
+    const plans = await workout.getPlans(req.body.name, req.body.username);
+    return res.json(plans);
+  } catch (err) {
+    const error = new ExpressError(406, "error in getting plans " + err);
+    return next(error);
+  }
+});
+
+workoutRouter.get("/plan/:planId", ensureLoggedIn, async (req, res, next) => {
+  try {
+    const workouts = await workout.getPlanWorkouts(req.params.planId);
+    return res.json(workouts);
+  } catch (err) {
+    const error = new ExpressError(
+      406,
+      "error in getting plans workouts " + err
+    );
+    return next(error);
+  }
+});
+
 module.exports = workoutRouter;

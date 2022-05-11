@@ -79,6 +79,41 @@ class Workout {
     }
     return true;
   }
+
+  async getPlans(planName, username) {
+    let query = "SELECT * FROM plans";
+    let filter = false;
+    if (planName) {
+      query = query + ` WHERE name LIKE '%${planName}%'`;
+      filter = true;
+    }
+
+    if (username) {
+      if (filter) {
+        query += ` AND username='${username}'`;
+      } else {
+        query += ` WHERE username='${username}'`;
+      }
+    }
+
+    const results = await db.query(query);
+    return results.rows;
+  }
+
+  async getPlanWorkouts(planId) {
+    const result = await db.query(
+      `SELECT * FROM Plan_workouts WHERE planid=${planId}`
+    );
+    const workoutids = result.rows.map((e) => e.workoutid);
+    const workouts = [];
+    for (let workoutId of workoutids) {
+      const result = await db.query(
+        `SELECT * FROM workout WHERE id=${workoutId}`
+      );
+      workouts.push(result.rows[0]);
+    }
+    return workouts;
+  }
 }
 
 module.exports = Workout;

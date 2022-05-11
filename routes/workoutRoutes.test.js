@@ -71,6 +71,58 @@ describe("POST /plan", function () {
   });
 });
 
+describe("GET /plan", () => {
+  test("plan retrive all plans", async () => {
+    const preReq = await request(app)
+      .post("/workouts/plan")
+      .send({
+        token: testUserToken,
+        name: "lowebody",
+        notes: "lowerbody program",
+        sun: true,
+        mon: false,
+        tue: true,
+        wed: false,
+        thu: true,
+        fri: false,
+        sat: false,
+        workouts: [1, 2],
+      });
+    const resp = await request(app)
+      .get("/workouts/plan")
+      .send({ token: testUserToken });
+    expect(resp.statusCode).toBe(200);
+    expect(resp.body.length).toBe(1);
+  });
+});
+
+describe("GET /plan/planId", () => {
+  test("plan retrive all plans", async () => {
+    const preReq = await request(app)
+      .post("/workouts/plan")
+      .send({
+        token: testUserToken,
+        name: "lowebody",
+        notes: "lowerbody program",
+        sun: true,
+        mon: false,
+        tue: true,
+        wed: false,
+        thu: true,
+        fri: false,
+        sat: false,
+        workouts: [1, 2],
+      });
+    const result = await db.query("SELECT id FROM plans");
+    const planId = result.rows[0].id;
+    const resp = await request(app)
+      .get("/workouts/plan/" + planId)
+      .send({ token: testUserToken });
+    expect(resp.statusCode).toBe(200);
+    expect(resp.body.length).toBeGreaterThanOrEqual(1);
+  });
+});
+
 afterEach(async function () {
   await db.query("DELETE FROM workout");
   await db.query("DELETE FROM plan_workouts");
