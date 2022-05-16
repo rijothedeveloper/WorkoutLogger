@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { jwt_secret, JWT_OPTIONS, BCRYPT_WORK_FACTOR } = require("../config");
 
-async function registerUser(username, password) {
+async function registerUser(username, password, height = 0, weight = 0) {
   const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
   const result = await db.query(
-    `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING username`,
-    [username, hashedPassword]
+    `INSERT INTO users (username, password, height, weight) VALUES ($1, $2, $3, $4) RETURNING username`,
+    [username, hashedPassword, height, weight]
   );
   return result.rows[0];
 }
