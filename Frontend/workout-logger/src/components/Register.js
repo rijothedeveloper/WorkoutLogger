@@ -15,8 +15,13 @@ const Register = ({ handleRegister }) => {
     });
   };
 
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    await handleRegister(formData);
+  };
+
   return (
-    <form onSubmit={handleRegister}>
+    <form method="post" onSubmit={onSubmit}>
       <label>
         User Name:
         <input
