@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = ({ handleRegister }) => {
   const [formData, setFormData] = useState({
@@ -15,9 +16,11 @@ const Register = ({ handleRegister }) => {
     });
   };
 
+  const navigate = useNavigate();
   const onSubmit = async (event) => {
     event.preventDefault();
     await handleRegister(formData);
+    navigate("/");
   };
 
   return (

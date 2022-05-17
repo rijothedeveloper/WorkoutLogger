@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { useState } from "react";
 import { FlashMessage } from "./components/FlashMessage";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -41,27 +42,6 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-
-    // try {
-    //   // const response = await axios.post("http://localhost:3000/user/register");
-    //   const response = await axios.post(
-    //     "http://localhost:3000/user/register",
-    //     {
-    //       username: data.username,
-    //       password: data.password,
-    //       height: data.height,
-    //       weight: data.weight,
-    //     },
-    //     {
-    //       headers: {
-    //         "Content-type": "application/json; charset=UTF-8",
-    //       },
-    //     }
-    //   );
-    //   console.log(response);
-    // } catch (err) {
-    //   console.log(err);
-    // }
   }
 
   async function handleLogin(data) {
@@ -88,6 +68,16 @@ function App() {
       console.log(error);
     }
   }
+
+  function handleLogout() {
+    setToken("");
+    setFlashMessage({
+      show: true,
+      message: "Logged out",
+      color: "green",
+    });
+  }
+
   return (
     <BrowserRouter>
       {flashmessage.show && (
@@ -97,19 +87,17 @@ function App() {
         />
       )}
       <nav>
-        <Navigation />
+        <Navigation loggedin={token ? true : false} onLogout={handleLogout} />
       </nav>
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route
-          path="/login"
-          element={<Login handleLogin={handleLogin} />}
-        ></Route>
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
           path="/register"
           element={<Register handleRegister={handleRegister} />}
-        ></Route>
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
