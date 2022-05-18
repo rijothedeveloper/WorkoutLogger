@@ -57,8 +57,8 @@ function App() {
           password: data.password,
         }),
       });
-      const token = await response.json();
-      setToken(token);
+      const res = await response.json();
+      setToken(res.token);
       setFlashMessage({
         show: true,
         message: "Logged in",
@@ -90,7 +90,7 @@ function App() {
         <Navigation loggedin={token ? true : false} onLogout={handleLogout} />
       </nav>
       <Routes>
-        <Route path="/" element={<Main />}></Route>
+        <Route path="/" element={<Main token={token} />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
