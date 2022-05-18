@@ -14,8 +14,16 @@ userRouter.post("/register", async (req, res, next) => {
     return next(expressError);
   }
   try {
-    const { username, password, height, weight } = req.body;
-    const result = await users.registerUser(username, password, height, weight);
+    const { firstName, lastName, username, password, height, weight } =
+      req.body;
+    const result = await users.registerUser(
+      firstName,
+      lastName,
+      username,
+      password,
+      height,
+      weight
+    );
     return res.status(201).json(result);
   } catch (error) {
     const customError = new ExpressError(

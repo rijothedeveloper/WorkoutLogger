@@ -5,7 +5,6 @@
   "default": {},
   "title": "Root Schema",
   "required": [
-    "token",
     "name",
     "notes",
     "sun",
@@ -18,14 +17,6 @@
     "workouts"
   ],
   "properties": {
-    "token": {
-      "type": "string",
-      "default": "",
-      "title": "The token Schema",
-      "examples": [
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlb3JnZSIsImlhdCI6MTY1MjE5NTgxNCwiZXhwIjoxNjUyMTk5NDE0fQ.rvfaTdoriSKN2r6j7AXTJUJ8GGZyOCCGnhHb_xoo-_c"
-      ]
-    },
     "name": {
       "type": "string",
       "default": "",

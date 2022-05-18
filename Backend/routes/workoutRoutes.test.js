@@ -19,8 +19,8 @@ beforeEach(async function () {
 
   const testUser = { username: "test" };
   const testAdmin = { username: "admin" };
-  testUserToken = jwt.sign(testUser, jwt_secret);
-  testAdminToken = jwt.sign(testAdmin, jwt_secret);
+  testUserToken = "Bearer " + jwt.sign(testUser, jwt_secret);
+  testAdminToken = "Bearer " + jwt.sign(testAdmin, jwt_secret);
 
   let query =
     "insert into workout (category, name, muscles, description, image_url, video_url) values (1,'outdoor walk test', 2, 'walk outside test','https://support.apple.com/library/content/dam/edam/applecare/images/en_US/navicons/content-nav-watch-workout-walking-icon.png', null)";
@@ -34,14 +34,14 @@ describe("GET /workout", function () {
   test("get all workouts", async () => {
     const resp = await request(app)
       .get("/workouts")
-      .send({ token: testUserToken });
+      .set("authorization", testUserToken);
     expect(resp.statusCode).toBe(200);
     expect(resp.body.length).toBe(2);
   });
   test("get workout with name indoor", async () => {
     const resp = await request(app)
       .get("/workouts?name=indoor")
-      .send({ token: testUserToken });
+      .set("authorization", testUserToken);
     expect(resp.statusCode).toBe(200);
     expect(resp.body.length).toBe(1);
   });
@@ -51,8 +51,8 @@ describe("POST /plan", function () {
   test("add a plan successfully", async () => {
     const resp = await request(app)
       .post("/workouts/plan")
+      .set("authorization", testUserToken)
       .send({
-        token: testUserToken,
         name: "lowebody",
         notes: "lowerbody program",
         sun: true,
@@ -75,6 +75,7 @@ describe("GET /plan", () => {
   test("plan retrive all plans", async () => {
     const preReq = await request(app)
       .post("/workouts/plan")
+      .set("authorization", testUserToken)
       .send({
         token: testUserToken,
         name: "lowebody",
@@ -90,7 +91,7 @@ describe("GET /plan", () => {
       });
     const resp = await request(app)
       .get("/workouts/plan")
-      .send({ token: testUserToken });
+      .set("authorization", testUserToken);
     expect(resp.statusCode).toBe(200);
     expect(resp.body.length).toBe(1);
   });
@@ -100,6 +101,7 @@ describe("GET /plan/planId", () => {
   test("plan retrive all plans", async () => {
     const preReq = await request(app)
       .post("/workouts/plan")
+      .set("authorization", testUserToken)
       .send({
         token: testUserToken,
         name: "lowebody",
@@ -117,7 +119,7 @@ describe("GET /plan/planId", () => {
     const planId = result.rows[0].id;
     const resp = await request(app)
       .get("/workouts/plan/" + planId)
-      .send({ token: testUserToken });
+      .set("authorization", testUserToken);
     expect(resp.statusCode).toBe(200);
     expect(resp.body.length).toBeGreaterThanOrEqual(1);
   });

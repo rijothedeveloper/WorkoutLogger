@@ -6,9 +6,12 @@ const request = require("supertest");
 const app = require("../app");
 
 beforeEach(async function () {
-  await request(app)
-    .post("/user/register")
-    .send({ username: "rijo1", password: "poopoo" });
+  await request(app).post("/user/register").send({
+    firstName: "Rijo",
+    lastName: "George",
+    username: "rijo1",
+    password: "poopoo",
+  });
 });
 
 afterEach(async function () {
@@ -21,9 +24,12 @@ afterAll(async function () {
 
 describe("/user/register", () => {
   test("register a new user", async function () {
-    const resp = await request(app)
-      .post("/user/register")
-      .send({ username: "george1", password: "zoozoo" });
+    const resp = await request(app).post("/user/register").send({
+      firstName: "Rijo",
+      lastName: "George",
+      username: "george1",
+      password: "zoozoo",
+    });
     expect(resp.statusCode).toBe(201);
     expect(resp.body).toEqual({
       username: "george1",
