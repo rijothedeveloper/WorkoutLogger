@@ -46,7 +46,14 @@ userRouter.post("/login", async (req, res, next) => {
     const user = await users.loginUser(username, password);
     if (user) {
       const token = createToken(user);
-      return res.json({ token });
+      return res.json({
+        firstName: user.firstname,
+        lastName: user.lastname,
+        username: user.username,
+        height: user.height,
+        weight: user.weight,
+        token,
+      });
     }
   } catch (err) {
     const customError = new ExpressError(

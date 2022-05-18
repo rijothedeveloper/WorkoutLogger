@@ -6,7 +6,7 @@ import About from "./components/About";
 import Navigation from "./components/Navigation";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlashMessage } from "./components/FlashMessage";
 import NotFound from "./components/NotFound";
 
@@ -16,7 +16,36 @@ function App() {
     message: "",
     color: "green",
   });
-  const [token, setToken] = useState("");
+  const [user, setUser] = useState({});
+  const [plans, setPlans] = useState("");
+
+  useEffect(() => {
+    const getPlans = async () => {
+      if (user) {
+        const plans = await fetchPlans(user.token);
+        setPlans(plans);
+      }
+    };
+    getPlans();
+  }, [user]);
+
+  async function fetchPlans(token) {
+    try {
+      const response = await fetch("http://localhost:3000/workouts/plan", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          authorization: "bearer " + token,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+      const plans = await response.json();
+      console.log(plans);
+      return plans;
+    } catch (err) {
+      return null;
+    }
+  }
 
   async function handleRegister(data) {
     try {
@@ -65,7 +94,7 @@ function App() {
         }),
       });
       const res = await response.json();
-      setToken(res.token);
+      setUser(res);
       setFlashMessage({
         show: true,
         message: "Logged in",
@@ -82,7 +111,7 @@ function App() {
   }
 
   function handleLogout() {
-    setToken("");
+    setUser("");
     setFlashMessage({
       show: true,
       message: "Logged out",
@@ -99,10 +128,13 @@ function App() {
         />
       )}
       <nav>
-        <Navigation loggedin={token ? true : false} onLogout={handleLogout} />
+        <Navigation
+          loggedin={user.token ? true : false}
+          onLogout={handleLogout}
+        />
       </nav>
       <Routes>
-        <Route path="/" element={<Main token={token} />}></Route>
+        <Route path="/" element={<Main plans={plans} />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
