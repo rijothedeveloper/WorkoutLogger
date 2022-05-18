@@ -27,6 +27,8 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
           username: data.username,
           password: data.password,
           height: data.height,
@@ -41,6 +43,11 @@ function App() {
       });
     } catch (error) {
       console.log(error);
+      setFlashMessage({
+        show: true,
+        message: "Error in registeration ",
+        color: "red",
+      });
     }
   }
 
@@ -66,6 +73,11 @@ function App() {
       });
     } catch (error) {
       console.log(error);
+      setFlashMessage({
+        show: true,
+        message: "Error in registeration ",
+        color: "red",
+      });
     }
   }
 
