@@ -134,7 +134,10 @@ function App() {
         />
       </nav>
       <Routes>
-        <Route path="/" element={<Main plans={plans} />}></Route>
+        <Route
+          path="/"
+          element={<Main plans={plans} loggedIn={user ? true : false} />}
+        ></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route

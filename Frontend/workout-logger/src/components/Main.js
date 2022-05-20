@@ -1,19 +1,15 @@
-const Main = ({ plans }) => {
-  let planElements;
-  if (plans) {
-    planElements = plans.map((plan) => <h2>{plan.name}</h2>);
-  }
+import Plans from "./Plans";
+import SavedPlans from "./SavedPlans";
+import Workouts from "./Workouts";
 
-  if (!plans) {
-    return <h2>main area</h2>;
-  } else {
-    return (
-      <div>
-        <button>create a plan</button>
-        {planElements}
-      </div>
-    );
-  }
+const Main = ({ plans, loggedIn }) => {
+  return (
+    <>
+      <SavedPlans plans={plans} loggedIn={loggedIn} />
+      <Plans />
+      <Workouts />
+    </>
+  );
 };
 
 export default Main;
