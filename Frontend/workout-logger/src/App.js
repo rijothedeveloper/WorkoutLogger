@@ -17,8 +17,8 @@ function App() {
     color: "green",
   });
 
-  const [token, setToken] = useState("");
-  const [username, setUsername] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [username, setUsername] = useState(localStorage.getItem("username"));
 
   async function handleRegister(data) {
     try {
