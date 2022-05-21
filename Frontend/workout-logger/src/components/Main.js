@@ -5,7 +5,7 @@ import Workouts from "./Workouts";
 const Main = ({ token }) => {
   return (
     <>
-      <SavedPlans />
+      <SavedPlans token={token} />
       <Plans token={token} />
       <Workouts token={token} />
     </>

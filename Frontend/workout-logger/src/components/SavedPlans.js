@@ -1,16 +1,10 @@
 import React from "react";
 
-function SavedPlans({ plans, loggedIn }) {
-  let planElements;
-  if (plans) {
-    planElements = plans.map((plan) => <h2>{plan.name}</h2>);
-  }
-
+function SavedPlans({ token }) {
   return (
     <div>
       <h2>My Plans</h2>
-      {loggedIn && <button>create a plan</button>}
-      {planElements}
+      {token && <button>create a plan</button>}
     </div>
   );
 }

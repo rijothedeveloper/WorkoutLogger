@@ -52,9 +52,9 @@ workoutRouter.post("/plan", ensureLoggedIn, async (req, res, next) => {
   }
 });
 
-workoutRouter.get("/plan", ensureLoggedIn, async (req, res, next) => {
+workoutRouter.get("/plan/", ensureLoggedIn, async (req, res, next) => {
   try {
-    const plans = await workout.getPlans(req.body.name, req.body.username);
+    const plans = await workout.getPlans(req.query.name, req.query.username);
     return res.json(plans);
   } catch (err) {
     const error = new ExpressError(406, "error in getting plans " + err);
