@@ -1,7 +1,7 @@
 import { Logout } from "./Logout";
 import NavItem from "./NavItem";
 
-const Navigation = ({ loggedin, onLogout }) => {
+const Navigation = ({ loggedin, onLogout, username }) => {
   let logginSec;
   if (!loggedin) {
     logginSec = (
@@ -11,7 +11,12 @@ const Navigation = ({ loggedin, onLogout }) => {
       </>
     );
   } else {
-    logginSec = <Logout onLogout={onLogout} />;
+    logginSec = (
+      <>
+        <Logout onLogout={onLogout} />
+        <NavItem link={username} />
+      </>
+    );
   }
   return <div> {logginSec} </div>;
 };

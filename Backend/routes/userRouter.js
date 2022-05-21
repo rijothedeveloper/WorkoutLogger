@@ -5,6 +5,7 @@ const ExpressError = require("../expressError");
 const jsonschema = require("jsonschema");
 const loginRegisterSchems = require("../schemas/loginRegister.json");
 const createToken = require("../helpers/tokens");
+const { ensureLoggedIn } = require("../middleware/auth");
 
 userRouter.post("/register", async (req, res, next) => {
   const validity = jsonschema.validate(req.body, loginRegisterSchems);
@@ -60,6 +61,22 @@ userRouter.post("/login", async (req, res, next) => {
       400,
       "error in username and password field required " + err
     );
+    return next(customError);
+  }
+});
+
+userRouter.get("/", ensureLoggedIn, async (req, res, next) => {
+  try {
+    const user = await users.getUserInfo(req.user.username);
+    return res.json({
+      firstName: user.firstname,
+      lastName: user.lastname,
+      username: user.username,
+      height: user.height,
+      weight: user.weight,
+    });
+  } catch (err) {
+    const customError = new ExpressError(400, "error in user " + err);
     return next(customError);
   }
 });

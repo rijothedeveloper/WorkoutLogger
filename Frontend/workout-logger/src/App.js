@@ -9,6 +9,7 @@ import Register from "./components/Register";
 import { useState } from "react";
 import { FlashMessage } from "./components/FlashMessage";
 import NotFound from "./components/NotFound";
+import UserInfo from "./components/UserInfo";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -107,7 +108,11 @@ function App() {
         />
       )}
       <nav>
-        <Navigation loggedin={token ? true : false} onLogout={handleLogout} />
+        <Navigation
+          loggedin={token ? true : false}
+          onLogout={handleLogout}
+          username={username}
+        />
       </nav>
       <Routes>
         <Route
@@ -120,6 +125,7 @@ function App() {
           path="/register"
           element={<Register handleRegister={handleRegister} />}
         />
+        <Route path={username} element={<UserInfo token={token} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

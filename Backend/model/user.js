@@ -37,5 +37,18 @@ async function loginUser(username, password) {
   }
 }
 
+async function getUserInfo(username) {
+  const result = await db.query("SELECT * FROM users WHERE username = $1", [
+    username,
+  ]);
+  const user = result.rows[0];
+  if (user) {
+    return user;
+  } else {
+    throw new ExpressError("Invalid user/password", 400);
+  }
+}
+
 exports.registerUser = registerUser;
 exports.loginUser = loginUser;
+exports.getUserInfo = getUserInfo;
