@@ -2,10 +2,10 @@ import Plans from "./Plans";
 import SavedPlans from "./SavedPlans";
 import Workouts from "./Workouts";
 
-const Main = ({ token }) => {
+const Main = ({ username, token }) => {
   return (
     <>
-      <SavedPlans token={token} />
+      <SavedPlans token={token} username={username} />
       <Plans token={token} />
       <Workouts token={token} />
     </>

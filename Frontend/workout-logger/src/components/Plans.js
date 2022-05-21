@@ -1,4 +1,5 @@
 import Plan from "./Plan";
+import { fetchPlans } from "../networking/Networking";
 import { useState, useEffect } from "react";
 
 const Plans = ({ token }) => {
@@ -15,24 +16,6 @@ const Plans = ({ token }) => {
     };
     getPlans();
   }, [token]);
-
-  async function fetchPlans(token) {
-    try {
-      const response = await fetch("http://localhost:3000/workouts/plan", {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          authorization: "bearer " + token,
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
-      const plans = await response.json();
-      console.log(plans);
-      return plans;
-    } catch (err) {
-      return null;
-    }
-  }
 
   const planElements = plans.map((e) => <Plan plan={e} />);
 

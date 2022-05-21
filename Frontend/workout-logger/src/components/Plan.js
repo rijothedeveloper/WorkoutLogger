@@ -1,9 +1,9 @@
 import React from "react";
 
-const Plan = (plan) => {
+const Plan = ({ plan }) => {
   return (
     <div>
-      <h2>plan.name</h2>
+      <h2>{plan.name}</h2>
     </div>
   );
 };

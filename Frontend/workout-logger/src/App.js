@@ -110,7 +110,10 @@ function App() {
         <Navigation loggedin={token ? true : false} onLogout={handleLogout} />
       </nav>
       <Routes>
-        <Route path="/" element={<Main token={token} />}></Route>
+        <Route
+          path="/"
+          element={<Main token={token} username={username} />}
+        ></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
