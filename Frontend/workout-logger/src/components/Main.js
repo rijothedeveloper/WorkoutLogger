@@ -7,7 +7,7 @@ const Main = ({ token }) => {
     <>
       <SavedPlans />
       <Plans token={token} />
-      <Workouts />
+      <Workouts token={token} />
     </>
   );
 };

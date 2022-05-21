@@ -16,8 +16,6 @@ const Plans = ({ token }) => {
     getPlans();
   }, [token]);
 
-  const planElements = plans.map((e) => <Plan plan={e} />);
-
   async function fetchPlans(token) {
     try {
       const response = await fetch("http://localhost:3000/workouts/plan", {
@@ -35,6 +33,8 @@ const Plans = ({ token }) => {
       return null;
     }
   }
+
+  const planElements = plans.map((e) => <Plan plan={e} />);
 
   return (
     <div>
