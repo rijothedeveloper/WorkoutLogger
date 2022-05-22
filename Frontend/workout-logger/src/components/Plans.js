@@ -1,6 +1,6 @@
-import Plan from "./Plan";
 import { fetchPlans } from "../networking/Networking";
 import { useState, useEffect } from "react";
+import PlansInfo from "./PlansInfo";
 
 const Plans = ({ token }) => {
   const [plans, setPlans] = useState([]);
@@ -17,14 +17,7 @@ const Plans = ({ token }) => {
     getPlans();
   }, [token]);
 
-  const planElements = plans.map((e) => <Plan plan={e} />);
-
-  return (
-    <div>
-      <h2>Plans sec</h2>
-      <div className="card-raw">{planElements}</div>
-    </div>
-  );
+  return <PlansInfo plans={plans} />;
 };
 
 export default Plans;
