@@ -18,7 +18,12 @@ const Navigation = ({ loggedin, onLogout, username }) => {
       </>
     );
   }
-  return <nav> {logginSec} </nav>;
+  return (
+    <nav>
+      {" "}
+      <ul>{logginSec} </ul>
+    </nav>
+  );
 };
 
 export default Navigation;
