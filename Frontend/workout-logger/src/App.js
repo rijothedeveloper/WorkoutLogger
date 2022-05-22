@@ -10,6 +10,7 @@ import { useState } from "react";
 import { FlashMessage } from "./components/FlashMessage";
 import NotFound from "./components/NotFound";
 import UserInfo from "./components/UserInfo";
+import Header from "./components/Header";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -18,7 +19,7 @@ function App() {
     color: "green",
   });
 
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [username, setUsername] = useState(localStorage.getItem("username"));
 
   async function handleRegister(data) {
@@ -107,13 +108,11 @@ function App() {
           color={flashmessage.color}
         />
       )}
-      <nav>
-        <Navigation
-          loggedin={token ? true : false}
-          onLogout={handleLogout}
-          username={username}
-        />
-      </nav>
+      <Header
+        loggedin={token ? true : false}
+        onLogout={handleLogout}
+        username={username}
+      />
       <Routes>
         <Route
           path="/"
