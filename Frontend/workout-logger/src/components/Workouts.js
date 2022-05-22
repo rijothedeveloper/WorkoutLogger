@@ -38,7 +38,7 @@ const Workouts = ({ token }) => {
   return (
     <div>
       <h2>Workouts sec</h2>
-      {workoutElments}
+      <div className="card-raw">{workoutElments}</div>
     </div>
   );
 };

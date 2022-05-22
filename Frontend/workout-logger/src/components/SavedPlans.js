@@ -23,7 +23,7 @@ function SavedPlans({ username, token }) {
     <div>
       <h2>My Plans</h2>
       {token && <button>create a plan</button>}
-      {planElements}
+      <div className="card-raw">{planElements}</div>
     </div>
   );
 }

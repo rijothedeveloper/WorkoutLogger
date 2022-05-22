@@ -22,7 +22,7 @@ const Plans = ({ token }) => {
   return (
     <div>
       <h2>Plans sec</h2>
-      {planElements}
+      <div className="card-raw">{planElements}</div>
     </div>
   );
 };
