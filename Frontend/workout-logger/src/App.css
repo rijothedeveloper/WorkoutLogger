@@ -1,5 +1,13 @@
 :root {
   --black-color: #030202;
+  --white-color: #efefef;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
 }
 
 body {
@@ -23,11 +31,15 @@ figure {
 
 figCaption {
   background-color: var(--black-color);
-  color: #efefef;
+  color: var(--white-color);
   position: absolute;
   bottom: 0%;
   width: 100%;
   opacity: 0.7;
+}
+
+form label {
+  color: var(--white-color);
 }
 
 .card-raw {
