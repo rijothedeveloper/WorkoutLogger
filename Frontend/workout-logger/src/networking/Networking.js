@@ -21,10 +21,9 @@ export async function fetchPlans(token, name = null, username = null) {
       },
     });
     const plans = await response.json();
-    console.log(plans);
     return plans;
   } catch (err) {
-    return null;
+    return err;
   }
 }
 
@@ -42,7 +41,7 @@ export async function fetchWorkouts(token) {
     console.log(w);
     return w;
   } catch (err) {
-    return null;
+    return err;
   }
 }
 
@@ -60,6 +59,6 @@ export async function fetchUserInfo(token) {
     console.log(user);
     return user;
   } catch (err) {
-    return null;
+    return err;
   }
 }

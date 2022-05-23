@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Workout from "./Workout";
 import { fetchWorkouts } from "../networking/Networking";
 import WorkoutList from "./WorkoutList";
+import { useNavigate } from "react-router-dom";
 
 const Workouts = ({ token }) => {
   const [workouts, setWorkouts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getWorkots = async () => {
@@ -15,6 +16,10 @@ const Workouts = ({ token }) => {
     };
     getWorkots();
   }, [token]);
+
+  if (workouts.error) {
+    navigate("/login");
+  }
 
   return <WorkoutList workouts={workouts} />;
 };

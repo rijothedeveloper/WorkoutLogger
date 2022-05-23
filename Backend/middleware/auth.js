@@ -11,7 +11,7 @@ function authenticateJWT(req, res, next) {
     req.user = payload;
     return next();
   } catch (err) {
-    return next();
+    return next(err);
   }
 }
 

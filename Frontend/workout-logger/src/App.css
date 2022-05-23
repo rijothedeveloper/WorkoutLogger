@@ -1,5 +1,17 @@
+:root {
+  --black-color: #030202;
+}
+
 body {
+  background-color: var(--black-color);
   margin: 10px;
+  background-color: ;
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2%;
 }
 
 figure {
@@ -10,7 +22,7 @@ figure {
 }
 
 figCaption {
-  background-color: #030202;
+  background-color: var(--black-color);
   color: #efefef;
   position: absolute;
   bottom: 0%;

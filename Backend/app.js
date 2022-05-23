@@ -21,9 +21,18 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
-  const status = err.status;
+  // let status;
+  const status = err.status ? err.status : 400;
   const message = err.message;
-  return res.status(status).json({ error: { message, status } });
+  let tokenValidity = true;
+  if (err.name === "TokenExpiredError") tokenValidity = false;
+  return res.status(status).json({
+    error: {
+      message: message,
+      status: status,
+      tokenValidity: tokenValidity,
+    },
+  });
 });
 
 module.exports = app;
