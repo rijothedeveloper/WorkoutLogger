@@ -1,7 +1,9 @@
 import Workout from "./Workout";
 
 const WorkoutList = ({ workouts }) => {
-  const workoutElments = workouts.map((e) => <Workout workout={e} />);
+  const workoutElments = workouts.map((e) => (
+    <Workout workout={e} key={e.id} />
+  ));
 
   return (
     <div>

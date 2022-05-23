@@ -38,7 +38,6 @@ export async function fetchWorkouts(token) {
       },
     });
     const w = await response.json();
-    console.log(w);
     return w;
   } catch (err) {
     return err;
@@ -56,7 +55,6 @@ export async function fetchUserInfo(token) {
       },
     });
     const user = await response.json();
-    console.log(user);
     return user;
   } catch (err) {
     return err;
