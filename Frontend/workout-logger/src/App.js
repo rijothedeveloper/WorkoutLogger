@@ -126,7 +126,10 @@ function App() {
           path="/register"
           element={<Register handleRegister={handleRegister} />}
         />
-        <Route path={username} element={<UserInfo token={token} />} />
+        <Route
+          path={`/user/${username}`}
+          element={<UserInfo token={token} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

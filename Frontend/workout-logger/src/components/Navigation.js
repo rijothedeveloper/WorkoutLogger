@@ -14,7 +14,7 @@ const Navigation = ({ loggedin, onLogout, username }) => {
     logginSec = (
       <>
         <NavItem link="logout" />
-        <NavItem link={username} />
+        <NavItem link={"user/" + username} />
       </>
     );
   }
