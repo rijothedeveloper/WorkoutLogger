@@ -6,5 +6,6 @@ export const Logout = ({ onLogout }) => {
     onLogout();
     navigate("/");
   };
-  return <button onClick={logout}>Logout</button>;
+  logout();
+  // return <button onClick={logout}>Logout</button>;
 };

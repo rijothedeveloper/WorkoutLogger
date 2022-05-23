@@ -11,6 +11,7 @@ import { FlashMessage } from "./components/FlashMessage";
 import NotFound from "./components/NotFound";
 import UserInfo from "./components/UserInfo";
 import Header from "./components/Header";
+import { Logout } from "./components/Logout";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -120,6 +121,7 @@ function App() {
         ></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
         <Route
           path="/register"
           element={<Register handleRegister={handleRegister} />}

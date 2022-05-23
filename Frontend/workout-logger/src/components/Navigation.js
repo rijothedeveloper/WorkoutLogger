@@ -13,7 +13,8 @@ const Navigation = ({ loggedin, onLogout, username }) => {
   } else {
     logginSec = (
       <>
-        <Logout onLogout={onLogout} />
+        {/* <Logout onLogout={onLogout} /> */}
+        <NavItem link="logout" />
         <NavItem link={username} />
       </>
     );
