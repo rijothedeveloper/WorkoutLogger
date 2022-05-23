@@ -11,7 +11,10 @@ function authenticateJWT(req, res, next) {
     req.user = payload;
     return next();
   } catch (err) {
-    return next(err);
+    if (err.name === "TokenExpiredError") {
+      return next(err);
+    }
+    return next();
   }
 }
 

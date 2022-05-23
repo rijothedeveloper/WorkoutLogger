@@ -1,12 +1,8 @@
 import Navigation from "./Navigation";
 
-const Header = ({ loggedin, handleLogout, username }) => {
+const Header = ({ loggedin, onLogout, username }) => {
   return (
-    <Navigation
-      loggedin={loggedin}
-      onLogout={handleLogout}
-      username={username}
-    />
+    <Navigation loggedin={loggedin} onLogout={onLogout} username={username} />
   );
 };
 

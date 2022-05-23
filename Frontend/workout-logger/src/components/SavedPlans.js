@@ -21,7 +21,7 @@ function SavedPlans({ username, token }) {
   }, [token]);
 
   if (plans.error) {
-    navigate("/login");
+    // navigate("/login");
   }
 
   return <PlansInfo plans={plans} />;

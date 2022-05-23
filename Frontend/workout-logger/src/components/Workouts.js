@@ -12,13 +12,15 @@ const Workouts = ({ token }) => {
       if (token) {
         const workouts = await fetchWorkouts(token);
         if (workouts) setWorkouts(workouts);
+      } else {
+        setWorkouts([]);
       }
     };
     getWorkots();
   }, [token]);
 
   if (workouts.error) {
-    navigate("/login");
+    // navigate("/login");
   }
 
   return <WorkoutList workouts={workouts} />;
