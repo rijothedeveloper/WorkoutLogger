@@ -28,8 +28,18 @@ const Navigation = ({ loggedin, onLogout, username }) => {
   }
   return (
     <nav>
-      {" "}
-      <ul>{logginSec} </ul>
+      <ul>
+        <li>
+          <NavItem link="myplans" />
+        </li>
+        <li>
+          <NavItem link="plans" title="All Plans" />
+        </li>
+        <li>
+          <NavItem link="workouts" title="All Workouts" />
+        </li>
+        {logginSec}
+      </ul>
     </nav>
   );
 };
