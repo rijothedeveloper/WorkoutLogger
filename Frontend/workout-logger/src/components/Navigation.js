@@ -6,15 +6,23 @@ const Navigation = ({ loggedin, onLogout, username }) => {
   if (!loggedin) {
     logginSec = (
       <>
-        <NavItem link="login" />
-        <NavItem link="register" />
+        <li>
+          <NavItem link="login" />
+        </li>
+        <li>
+          <NavItem link="register" />
+        </li>
       </>
     );
   } else {
     logginSec = (
       <>
-        <NavItem link="logout" />
-        <NavItem link={"user/" + username} />
+        <li>
+          <NavItem link="logout" />
+        </li>
+        <li>
+          <NavItem link={"user/" + username} />
+        </li>
       </>
     );
   }

@@ -12,6 +12,7 @@ import NotFound from "./components/NotFound";
 import UserInfo from "./components/UserInfo";
 import Header from "./components/Header";
 import { Logout } from "./components/Logout";
+import WorkoutDetail from "./components/WorkoutDetail";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -97,7 +98,7 @@ function App() {
     setFlashMessage({
       show: true,
       message: "Logged out",
-      color: "green",
+      color: "#089e79",
     });
   }
 
@@ -130,6 +131,7 @@ function App() {
           path={`/user/${username}`}
           element={<UserInfo token={token} />}
         />
+        {/* <Route path="workout/:id" element={WorkoutDetail} */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

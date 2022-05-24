@@ -1,6 +1,8 @@
 :root {
   --black-color: #030202;
   --white-color: #efefef;
+  --secondary-color: #e8462d;
+  --flasgreen-color: #089e79;
 }
 
 * {
@@ -17,9 +19,23 @@ body {
 }
 
 nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: flex-end;
   gap: 2%;
+}
+
+nav ul li a {
+  display: block;
+  padding: 8px;
+  text-decoration: none;
+  color: var(--white-color);
+}
+
+nav ul li a:hover {
+  background-color: var(--secondary-color);
 }
 
 figure {
@@ -39,7 +55,25 @@ figCaption {
 }
 
 form label {
+  display: block;
+  margin: 10px;
   color: var(--white-color);
+}
+
+form input {
+  display: block;
+  background-color: #1e1f23;
+  border: 1px solid var(--secondary-color);
+  color: var(--white-color);
+  padding: 2px;
+}
+
+input[type="submit"] {
+  margin-left: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
 }
 
 .card-raw {
