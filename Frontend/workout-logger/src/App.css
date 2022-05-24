@@ -76,6 +76,19 @@ input[type="submit"] {
   background-color: var(--secondary-color);
 }
 
+.logo {
+  margin-right: auto;
+}
+
+nav ul .logo a:hover {
+  background-color: transparent;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
 .card-raw {
 }
 

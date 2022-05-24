@@ -1,5 +1,6 @@
-import { Logout } from "./Logout";
 import NavItem from "./NavItem";
+import logo from "../images/logo.png";
+import { Link } from "react-router-dom";
 
 const Navigation = ({ loggedin, onLogout, username }) => {
   let logginSec;
@@ -29,6 +30,11 @@ const Navigation = ({ loggedin, onLogout, username }) => {
   return (
     <nav>
       <ul>
+        <li class="logo">
+          <Link to="/">
+            <img src={logo} />
+          </Link>
+        </li>
         <li>
           <NavItem link="myplans" />
         </li>
