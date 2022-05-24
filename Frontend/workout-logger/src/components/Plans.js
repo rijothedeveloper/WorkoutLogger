@@ -22,7 +22,12 @@ const Plans = ({ token }) => {
     // navigate("/login");
   }
 
-  return <PlansInfo plans={plans} />;
+  return (
+    <>
+      <h2>Plans</h2>
+      <PlansInfo plans={plans} />
+    </>
+  );
 };
 
 export default Plans;

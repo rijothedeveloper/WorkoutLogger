@@ -24,7 +24,12 @@ function SavedPlans({ username, token }) {
     // navigate("/login");
   }
 
-  return <PlansInfo plans={plans} />;
+  return (
+    <>
+      <h2>My Plans</h2>
+      <PlansInfo plans={plans} />
+    </>
+  );
 }
 
 export default SavedPlans;

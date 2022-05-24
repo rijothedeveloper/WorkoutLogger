@@ -21,7 +21,7 @@ const Navigation = ({ loggedin, onLogout, username }) => {
           <NavItem link="logout" />
         </li>
         <li>
-          <NavItem link={"user/" + username} />
+          <NavItem link={"user/" + username} title={username} />
         </li>
       </>
     );
