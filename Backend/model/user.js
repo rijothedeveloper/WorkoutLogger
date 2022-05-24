@@ -49,6 +49,32 @@ async function getUserInfo(username) {
   }
 }
 
+async function saveUserInfo(
+  firstName,
+  lastName,
+  username,
+  password,
+  height = 0,
+  weight = 0
+) {
+  const query = `UPDATE users SET firstname='${firstName}', lastname='${lastName}', height=${height}, weight=${weight} WHERE username = '${username}' RETURNING username`;
+
+  let result = await db.query(query);
+
+  if (result.rows.length > 0 && password) {
+    const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+    result = await db.query(
+      `UPDATE users SET password='${hashedPassword}' WHERE username = '${username}' RETURNING username`
+    );
+  }
+
+  if (result.rows.length > 0) {
+    return true;
+  }
+  return false;
+}
+
 exports.registerUser = registerUser;
 exports.loginUser = loginUser;
 exports.getUserInfo = getUserInfo;
+exports.saveUserInfo = saveUserInfo;

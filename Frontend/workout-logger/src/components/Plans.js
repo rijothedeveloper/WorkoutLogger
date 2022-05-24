@@ -1,11 +1,11 @@
 import { fetchPlans } from "../networking/Networking";
 import { useState, useEffect } from "react";
 import PlansInfo from "./PlansInfo";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Plans = ({ token }) => {
   const [plans, setPlans] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     const getPlans = async () => {
       if (token) {
@@ -18,8 +18,8 @@ const Plans = ({ token }) => {
     getPlans();
   }, [token]);
 
-  if (plans.error) {
-    // navigate("/login");
+  if (plans.error && plans.error.message === "jwt expired") {
+    navigate("/login");
   }
 
   return (

@@ -1,12 +1,12 @@
-import { fetchUserInfo } from "../networking/Networking";
+import { fetchUserInfo, saveUserInfo } from "../networking/Networking";
 import { useEffect, useState } from "react";
 
-const UserInfo = ({ token }) => {
+const UserInfo = ({ token, username, setFlashMessage }) => {
   const [user, setUser] = useState("");
   useEffect(() => {
     const getUserInfo = async () => {
       if (token) {
-        const u = await fetchUserInfo(token);
+        const u = await fetchUserInfo(token, username);
         setUser(u);
         setFormData({
           firstName: u.firstName,
@@ -39,6 +39,24 @@ const UserInfo = ({ token }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    saveUser();
+  };
+
+  const saveUser = async () => {
+    const result = await saveUserInfo(token, formData);
+    if (result) {
+      setFlashMessage({
+        show: true,
+        message: "Save user sucessfully ",
+        color: "green",
+      });
+    } else {
+      setFlashMessage({
+        show: true,
+        message: "Error in save user ",
+        color: "red",
+      });
+    }
   };
 
   return (
@@ -95,16 +113,6 @@ const UserInfo = ({ token }) => {
       <input type="submit" value="Save" />
     </form>
   );
-
-  // return (
-  //   <div>
-  //     <h3>{user.firstname}</h3>
-  //     <h3>{user.lastname}</h3>
-  //     <h3>{user.username}</h3>
-  //     <h3>{user.height}</h3>
-  //     <h3>{user.weight}</h3>
-  //   </div>
-  // );
 };
 
 export default UserInfo;

@@ -132,7 +132,13 @@ function App() {
         />
         <Route
           path={`/user/${username}`}
-          element={<UserInfo token={token} />}
+          element={
+            <UserInfo
+              token={token}
+              username={username}
+              setFlashMessage={setFlashMessage}
+            />
+          }
         />
         <Route path="myplans" element={<SavedPlans token={token} />} />
         <Route path="plans" element={<Plans token={token} />} />

@@ -21,13 +21,23 @@ function authenticateJWT(req, res, next) {
 function ensureLoggedIn(req, res, next) {
   if (!req.user) {
     const error = new expressError(401, "unauthorized");
-    return next(err);
+    return next(error);
   } else {
     return next();
+  }
+}
+
+function ensureSameUser(req, res, next) {
+  if (req.user.username === req.params.username) {
+    return next();
+  } else {
+    const error = new expressError(401, "unauthorized for this user");
+    return next(error);
   }
 }
 
 module.exports = {
   authenticateJWT,
   ensureLoggedIn,
+  ensureSameUser,
 };
