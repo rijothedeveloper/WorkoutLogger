@@ -114,6 +114,16 @@ class Workout {
     }
     return workouts;
   }
+
+  async getMuscles() {
+    const result = await db.query(`SELECT * FROM muscles`);
+    return result.rows;
+  }
+
+  async getWorkoutCategory() {
+    const result = await db.query(`SELECT * FROM workout_category`);
+    return result.rows;
+  }
 }
 
 module.exports = Workout;

@@ -75,4 +75,28 @@ workoutRouter.get("/plan/:planId", ensureLoggedIn, async (req, res, next) => {
   }
 });
 
+workoutRouter.get("/muscles", ensureLoggedIn, async (req, res, next) => {
+  try {
+    const muscles = await workout.getMuscles();
+    return res.json(muscles);
+  } catch (err) {
+    const error = new ExpressError(400, "problem retriving muscles " + err);
+    return next(error);
+  }
+});
+
+workoutRouter.get(
+  "/workoutCategories",
+  ensureLoggedIn,
+  async (req, res, next) => {
+    try {
+      const categories = await workout.getWorkoutCategory();
+      return res.json(categories);
+    } catch (err) {
+      const error = new ExpressError(400, "problem retriving muscles " + err);
+      return next(error);
+    }
+  }
+);
+
 module.exports = workoutRouter;
