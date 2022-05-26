@@ -115,6 +115,22 @@ class Workout {
     return workouts;
   }
 
+  async addWorkout(workout) {
+    const result = await db.query(
+      "INSERT INTO workout (category, name, muscles, description, image_url, video_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
+      [
+        workout.category,
+        workout.name,
+        workout.muscle,
+        workout.description,
+        workout.imageUrl,
+        workout.videoUrl,
+      ]
+    );
+    const workoutId = result.rows[0];
+    return workoutId;
+  }
+
   async getMuscles() {
     const result = await db.query(`SELECT * FROM muscles`);
     return result.rows;

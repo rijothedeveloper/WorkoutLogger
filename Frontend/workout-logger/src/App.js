@@ -144,7 +144,12 @@ function App() {
         <Route path="myplans" element={<SavedPlans token={token} />} />
         <Route path="plans" element={<Plans token={token} />} />
         <Route path="workouts" element={<Workouts token={token} />} />
-        <Route path="newWorkout" element={<NewWorkout token={token} />} />
+        <Route
+          path="newWorkout"
+          element={
+            <NewWorkout token={token} setFlashMessage={setFlashMessage} />
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

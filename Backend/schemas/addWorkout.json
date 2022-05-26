@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "default": {},
+  "title": "Root Schema",
+  "required": ["category", "muscle", "name", "description"],
+  "properties": {
+    "category": {
+      "type": ["integer", "string"],
+      "default": 0,
+      "title": "The category Schema",
+      "examples": [1]
+    },
+    "muscle": {
+      "type": ["integer", "string"],
+      "default": 0,
+      "title": "The muscle Schema",
+      "examples": [1]
+    },
+    "name": {
+      "type": "string",
+      "default": "",
+      "title": "The name Schema",
+      "examples": ["creative"]
+    },
+    "description": {
+      "type": "string",
+      "default": "",
+      "title": "The description Schema",
+      "examples": ["fgg"]
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": "",
+      "title": "The imageUrl Schema",
+      "examples": ["none"]
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": "",
+      "title": "The videoUrl Schema",
+      "examples": ["none"]
+    }
+  },
+  "examples": [
+    {
+      "category": 1,
+      "muscle": 1,
+      "name": "creative",
+      "description": "fgg",
+      "imageUrl": "none",
+      "videoUrl": "none"
+    }
+  ]
+}

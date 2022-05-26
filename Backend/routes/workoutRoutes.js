@@ -8,6 +8,7 @@ const workout = new workoutClass();
 
 const jsonSchema = require("jsonschema");
 const planSchema = require("../schemas/planschema.json");
+const workoutSchema = require("../schemas/addWorkout.json");
 
 workoutRouter.get("/", ensureLoggedIn, async (req, res) => {
   const results = await workout.getAllWorkouts(
@@ -98,5 +99,25 @@ workoutRouter.get(
     }
   }
 );
+
+workoutRouter.post("/addWorkout", ensureLoggedIn, async (req, res, next) => {
+  const w = req.body;
+  const inputValidity = jsonSchema.validate(req.body, workoutSchema);
+  if (!inputValidity.valid) {
+    const listOfErrors = inputValidity.errors.map((error) => error.stack);
+    const expressError = new ExpressError(406, listOfErrors);
+    return next(expressError);
+  }
+  try {
+    const workoutId = await workout.addWorkout(w);
+    return res.json(workoutId);
+  } catch (err) {
+    const error = new ExpressError(
+      400,
+      "error in entering workout to database " + err
+    );
+    return next(error);
+  }
+});
 
 module.exports = workoutRouter;

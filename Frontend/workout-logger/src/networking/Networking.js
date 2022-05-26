@@ -125,3 +125,21 @@ export async function getWorkoutCategories(token) {
     return error;
   }
 }
+
+export async function addWorkout(token, workout) {
+  try {
+    const response = await fetch("http://localhost:3000/workouts/addWorkout", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        authorization: "bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(workout),
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
