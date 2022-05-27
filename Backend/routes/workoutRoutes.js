@@ -41,9 +41,7 @@ workoutRouter.post("/plan", ensureLoggedIn, async (req, res, next) => {
   };
   try {
     const result = await workout.addPlan(data);
-    if (result) {
-      return res.json({ result: "success" });
-    }
+    return res.json(result);
   } catch (err) {
     const error = new ExpressError(
       400,

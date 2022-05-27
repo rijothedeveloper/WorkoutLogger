@@ -45,7 +45,10 @@ const Navigation = ({ loggedin, onLogout, username }) => {
           <NavItem link="workouts" title="All Workouts" />
         </li>
         <li>
-          <NavItem link="newWorkout" title="create Workout" />
+          <NavItem link="newWorkout" title="Create Workout" />
+        </li>
+        <li>
+          <NavItem link="newPlan" title="create Plan" />
         </li>
         {logginSec}
       </ul>

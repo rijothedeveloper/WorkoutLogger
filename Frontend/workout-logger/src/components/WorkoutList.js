@@ -1,8 +1,13 @@
 import Workout from "./Workout";
 
-const WorkoutList = ({ workouts }) => {
+const WorkoutList = ({ workouts, addable, handleChange }) => {
   const workoutElments = workouts.map((e) => (
-    <Workout workout={e} key={e.id} />
+    <Workout
+      workout={e}
+      key={e.id}
+      addable={addable}
+      handleChange={handleChange}
+    />
   ));
 
   return (

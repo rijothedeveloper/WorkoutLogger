@@ -1,101 +1,110 @@
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "http://example.com/example.json",
   "type": "object",
   "default": {},
   "title": "Root Schema",
-  "required": [
-    "name",
-    "notes",
-    "sun",
-    "mon",
-    "tue",
-    "wed",
-    "thu",
-    "fri",
-    "sat",
-    "workouts"
-  ],
+  "required": ["name", "notes", "days", "workouts"],
   "properties": {
     "name": {
       "type": "string",
       "default": "",
       "title": "The name Schema",
-      "examples": ["lowebody"]
+      "examples": ["new plan 33"]
     },
     "notes": {
       "type": "string",
       "default": "",
       "title": "The notes Schema",
-      "examples": ["lowerbody program"]
+      "examples": ["notes are"]
     },
-    "sun": {
-      "type": "boolean",
-      "default": false,
-      "title": "The sun Schema",
-      "examples": [true]
-    },
-    "mon": {
-      "type": "boolean",
-      "default": false,
-      "title": "The mon Schema",
-      "examples": [false]
-    },
-    "tue": {
-      "type": "boolean",
-      "default": false,
-      "title": "The tue Schema",
-      "examples": [true]
-    },
-    "wed": {
-      "type": "boolean",
-      "default": false,
-      "title": "The wed Schema",
-      "examples": [false]
-    },
-    "thu": {
-      "type": "boolean",
-      "default": false,
-      "title": "The thu Schema",
-      "examples": [true]
-    },
-    "fri": {
-      "type": "boolean",
-      "default": false,
-      "title": "The fri Schema",
-      "examples": [false]
-    },
-    "sat": {
-      "type": "boolean",
-      "default": false,
-      "title": "The sat Schema",
-      "examples": [false]
+    "days": {
+      "type": "object",
+      "default": {},
+      "title": "The days Schema",
+      "required": ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+      "properties": {
+        "sun": {
+          "type": "boolean",
+          "default": false,
+          "title": "The sun Schema",
+          "examples": [false]
+        },
+        "mon": {
+          "type": "boolean",
+          "default": false,
+          "title": "The mon Schema",
+          "examples": [true]
+        },
+        "tue": {
+          "type": "boolean",
+          "default": false,
+          "title": "The tue Schema",
+          "examples": [false]
+        },
+        "wed": {
+          "type": "boolean",
+          "default": false,
+          "title": "The wed Schema",
+          "examples": [true]
+        },
+        "thu": {
+          "type": "boolean",
+          "default": false,
+          "title": "The thu Schema",
+          "examples": [false]
+        },
+        "fri": {
+          "type": "boolean",
+          "default": false,
+          "title": "The fri Schema",
+          "examples": [true]
+        },
+        "sat": {
+          "type": "boolean",
+          "default": false,
+          "title": "The sat Schema",
+          "examples": [false]
+        }
+      },
+      "examples": [
+        {
+          "sun": false,
+          "mon": true,
+          "tue": false,
+          "wed": true,
+          "thu": false,
+          "fri": true,
+          "sat": false
+        }
+      ]
     },
     "workouts": {
       "type": "array",
       "default": [],
       "title": "The workouts Schema",
       "items": {
-        "type": "integer",
+        "type": "string",
         "title": "A Schema",
-        "examples": [1, 2]
+        "examples": ["2", "5", "20"]
       },
-      "examples": [[1, 2]]
+      "examples": [["2", "5", "20"]]
     }
   },
   "examples": [
     {
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlb3JnZSIsImlhdCI6MTY1MjE5NTgxNCwiZXhwIjoxNjUyMTk5NDE0fQ.rvfaTdoriSKN2r6j7AXTJUJ8GGZyOCCGnhHb_xoo-_c",
-      "name": "lowebody",
-      "notes": "lowerbody program",
-      "sun": true,
-      "mon": false,
-      "tue": true,
-      "wed": false,
-      "thu": true,
-      "fri": false,
-      "sat": false,
-      "workouts": [1, 2]
+      "name": "new plan 33",
+      "notes": "notes are",
+      "days": {
+        "sun": false,
+        "mon": true,
+        "tue": false,
+        "wed": true,
+        "thu": false,
+        "fri": true,
+        "sat": false
+      },
+      "workouts": ["2", "5", "20"]
     }
   ]
 }

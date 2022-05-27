@@ -17,6 +17,7 @@ import Workouts from "./components/Workouts";
 import SavedPlans from "./components/SavedPlans";
 import Plans from "./components/Plans";
 import NewWorkout from "./components/NewWorkout";
+import NewPlan from "./components/NewPlan";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -149,6 +150,10 @@ function App() {
           element={
             <NewWorkout token={token} setFlashMessage={setFlashMessage} />
           }
+        />
+        <Route
+          path="newPlan"
+          element={<NewPlan token={token} setFlashMessage={setFlashMessage} />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

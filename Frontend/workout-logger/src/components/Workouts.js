@@ -3,7 +3,7 @@ import { fetchWorkouts } from "../networking/Networking";
 import WorkoutList from "./WorkoutList";
 import { useNavigate } from "react-router-dom";
 
-const Workouts = ({ token }) => {
+const Workouts = ({ token, addable, handleChange }) => {
   const [workouts, setWorkouts] = useState([]);
   const navigate = useNavigate();
 
@@ -23,7 +23,13 @@ const Workouts = ({ token }) => {
     // navigate("/login");
   }
 
-  return <WorkoutList workouts={workouts} />;
+  return (
+    <WorkoutList
+      workouts={workouts}
+      addable={addable}
+      handleChange={handleChange}
+    />
+  );
 };
 
 export default Workouts;

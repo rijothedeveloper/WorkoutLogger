@@ -143,3 +143,21 @@ export async function addWorkout(token, workout) {
     return err;
   }
 }
+
+export async function addPlan(token, plan) {
+  try {
+    const response = await fetch("http://localhost:3000/workouts/plan", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        authorization: "bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(plan),
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
+}

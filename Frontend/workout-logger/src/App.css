@@ -68,6 +68,11 @@ form input {
   padding: 2px;
 }
 
+form input[type="checkbox"] {
+  display: inline-block;
+  margin-left: 16px;
+}
+
 input[type="submit"] {
   margin-left: 10px;
   margin-top: 20px;
@@ -89,13 +94,25 @@ nav ul .logo a:hover {
   height: auto;
 }
 
-.card-raw {
+.cursor {
+  cursor: pointer;
 }
 
 .card {
   border: 1px solid grey;
   height: 200px;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.checkArea {
+  display: flex;
+  flex-flow: row wrap;
+}
+.checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 @media (min-width: 400px) {
