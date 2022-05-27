@@ -11,7 +11,7 @@ function SavedPlans({ username, token }) {
   useEffect(() => {
     const getPlans = async () => {
       if (token) {
-        const plans = await fetchPlans(token, null, "rijo");
+        const plans = await fetchPlans(token, null, username);
         setPlans(plans);
       } else {
         setPlans([]);

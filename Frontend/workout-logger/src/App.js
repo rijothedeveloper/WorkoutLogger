@@ -146,6 +146,10 @@ function App() {
         <Route path="plans" element={<Plans token={token} />} />
         <Route path="workouts" element={<Workouts token={token} />} />
         <Route
+          path="workouts/:workoutId"
+          element={<WorkoutDetail token={token} />}
+        />
+        <Route
           path="newWorkout"
           element={
             <NewWorkout token={token} setFlashMessage={setFlashMessage} />

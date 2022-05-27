@@ -98,6 +98,11 @@ workoutRouter.get(
   }
 );
 
+workoutRouter.get("/:workoutId", ensureLoggedIn, async (req, res) => {
+  const result = await workout.getWorkout(req.params.workoutId);
+  return res.json(result);
+});
+
 workoutRouter.post("/addWorkout", ensureLoggedIn, async (req, res, next) => {
   const w = req.body;
   const inputValidity = jsonSchema.validate(req.body, workoutSchema);

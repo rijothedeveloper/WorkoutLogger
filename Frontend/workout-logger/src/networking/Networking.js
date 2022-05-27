@@ -44,6 +44,26 @@ export async function fetchWorkouts(token) {
   }
 }
 
+export async function fetchWorkout(token, workoutId) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/workouts/${workoutId}`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          authorization: "bearer " + token,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+    const w = await response.json();
+    return w;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function fetchUserInfo(token, username) {
   try {
     const response = await fetch(`http://localhost:3000/user/${username}`, {
