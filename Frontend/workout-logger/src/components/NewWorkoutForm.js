@@ -23,6 +23,14 @@ const NewWorkoutForm = ({ muscles, categories, addWorkout }) => {
   const onSubmit = (event) => {
     event.preventDefault();
     addWorkout(formData);
+    setFormData({
+      name: "",
+      category: 1,
+      muscle: 1,
+      description: "",
+      imageUrl: "",
+      videoUrl: "",
+    });
   };
 
   return (

@@ -44,6 +44,13 @@ const NewPlanForm = ({ token, savePlan }) => {
       workouts: Array.from(workouts),
     };
     savePlan(plan);
+    setDays(new Array(7).fill(false));
+    setWorkouts(new Set());
+    setFormData({
+      ...formData,
+      ["name"]: "",
+      ["notes"]: "",
+    });
   };
 
   return (
