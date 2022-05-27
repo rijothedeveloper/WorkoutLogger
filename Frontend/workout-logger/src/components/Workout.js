@@ -7,7 +7,7 @@ const Workout = ({ workout, addable, handleChange }) => {
   if (!addable) {
     return (
       <div className="card">
-        <a href={"/workout/" + workout.id}>
+        <a href={"/workouts/" + workout.id}>
           <figure>
             <img src={workoutImage} height="200px" />
             <figcaption>
