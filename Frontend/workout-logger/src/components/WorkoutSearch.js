@@ -9,11 +9,12 @@ const WorkoutSearch = ({ muscles, categories, filter }) => {
   ));
   const [formData, setFormData] = useState({});
   const onChange = (event) => {
-    setFormData({
+    const data = {
       ...formData,
       [event.target.name]: event.target.value,
-    });
-    filter(formData);
+    };
+    setFormData(data);
+    filter(data);
   };
   return (
     <div className="searchBox">
