@@ -9,7 +9,11 @@ const Workout = ({ workout, addable, handleChange }) => {
       <div className="card">
         <a href={"/workouts/" + workout.id}>
           <figure>
-            <img src={workoutImage} height="200px" />
+            {workout.image_url ? (
+              <img src={workout.image_url} height="200px" />
+            ) : (
+              <img src={workoutImage} height="200px" />
+            )}
             <figcaption>
               <h2>{workout.name}</h2>
             </figcaption>
