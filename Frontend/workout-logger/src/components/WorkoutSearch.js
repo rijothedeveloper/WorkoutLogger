@@ -30,15 +30,15 @@ const WorkoutSearch = ({ muscles, categories, filter }) => {
       <label>
         Choose Category:
         <select name="category" value={formData.category} onChange={onChange}>
-          {" "}
-          {categoryOptions}{" "}
+          <option />
+          {categoryOptions}
         </select>
       </label>
       <label>
         Choose Muscle:
         <select name="muscles" value={formData.muscle} onChange={onChange}>
-          {" "}
-          {muscleOptions}{" "}
+          <option />
+          {muscleOptions}
         </select>
       </label>
     </div>
