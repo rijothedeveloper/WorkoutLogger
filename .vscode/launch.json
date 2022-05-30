@@ -3,13 +3,26 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Launch whole app",
+      "configurations": ["Launch server", "Launch Chrome"]
+    }
+  ],
   "configurations": [
     {
-      "type": "pwa-node",
+      "name": "Launch server",
+      "program": "${workspaceFolder}/Backend/server.js",
       "request": "launch",
-      "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/Backend/server.js"
+      "type": "node"
+    },
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:3001",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }

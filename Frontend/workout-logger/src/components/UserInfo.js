@@ -1,12 +1,14 @@
 import { fetchUserInfo, saveUserInfo } from "../networking/Networking";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import UserContext from "../UserContext";
 
-const UserInfo = ({ token, username, setFlashMessage }) => {
+const UserInfo = ({ setFlashMessage }) => {
   const [user, setUser] = useState("");
+  const [userContext] = useContext(UserContext);
   useEffect(() => {
     const getUserInfo = async () => {
-      if (token) {
-        const u = await fetchUserInfo(token, username);
+      if (userContext.token) {
+        const u = await fetchUserInfo(userContext.token, userContext.username);
         setUser(u);
         setFormData({
           firstName: u.firstName,
@@ -18,8 +20,8 @@ const UserInfo = ({ token, username, setFlashMessage }) => {
         });
       }
     };
-    getUserInfo(token);
-  }, [token]);
+    getUserInfo(userContext.token);
+  }, [userContext]);
 
   const [formData, setFormData] = useState({
     firstName: user.firstName,
@@ -43,7 +45,7 @@ const UserInfo = ({ token, username, setFlashMessage }) => {
   };
 
   const saveUser = async () => {
-    const result = await saveUserInfo(token, formData);
+    const result = await saveUserInfo(userContext.token, formData);
     if (result) {
       setFlashMessage({
         show: true,

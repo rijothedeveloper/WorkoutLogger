@@ -18,6 +18,7 @@ import SavedPlans from "./components/SavedPlans";
 import Plans from "./components/Plans";
 import NewWorkout from "./components/NewWorkout";
 import NewPlan from "./components/NewPlan";
+import UserContext from "./UserContext";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -26,8 +27,14 @@ function App() {
     color: "green",
   });
 
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [username, setUsername] = useState(localStorage.getItem("username"));
+  // const [token, setToken] = useState(localStorage.getItem("token"));
+  // const [username, setUsername] = useState(localStorage.getItem("username"));
+
+  const [user, setUser] = useState({
+    username: "",
+    token: "",
+    loggedIn: false,
+  });
 
   async function handleRegister(data) {
     try {
@@ -76,10 +83,11 @@ function App() {
         }),
       });
       const res = await response.json();
-      setToken(res.token);
-      setUsername(res.username);
-      localStorage.setItem("token", res.token);
-      localStorage.setItem("username", res.username);
+      setUser({
+        username: res.username,
+        token: res.token,
+        loggedin: true,
+      });
       setFlashMessage({
         show: true,
         message: "Logged in",
@@ -96,10 +104,11 @@ function App() {
   }
 
   function handleLogout() {
-    setToken("");
-    setUsername("");
-    localStorage.setItem("token", "");
-    localStorage.setItem("username", "");
+    setUser({
+      username: "",
+      tokken: "",
+      loggedIn: false,
+    });
     setFlashMessage({
       show: true,
       message: "Logged out",
@@ -108,61 +117,45 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      {flashmessage.show && (
-        <FlashMessage
-          message={flashmessage.message}
-          color={flashmessage.color}
-        />
-      )}
-      <Header
-        loggedin={token ? true : false}
-        onLogout={handleLogout}
-        username={username}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={<Main token={token} username={username} />}
-        ></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
-        <Route
-          path="/register"
-          element={<Register handleRegister={handleRegister} />}
-        />
-        <Route
-          path={`/user/${username}`}
-          element={
-            <UserInfo
-              token={token}
-              username={username}
-              setFlashMessage={setFlashMessage}
-            />
-          }
-        />
-        <Route path="myplans" element={<SavedPlans token={token} />} />
-        <Route path="plans" element={<Plans token={token} />} />
-        <Route path="workouts" element={<Workouts token={token} />} />
-        <Route
-          path="workouts/:workoutId"
-          element={<WorkoutDetail token={token} />}
-        />
-        <Route
-          path="newWorkout"
-          element={
-            <NewWorkout token={token} setFlashMessage={setFlashMessage} />
-          }
-        />
-        <Route
-          path="newPlan"
-          element={<NewPlan token={token} setFlashMessage={setFlashMessage} />}
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <UserContext.Provider value={[user, setUser]}>
+      <BrowserRouter>
+        {flashmessage.show && (
+          <FlashMessage
+            message={flashmessage.message}
+            color={flashmessage.color}
+          />
+        )}
+        <Header onLogout={handleLogout} />
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
+          <Route
+            path="/register"
+            element={<Register handleRegister={handleRegister} />}
+          />
+          <Route
+            path={`/user/${user.username}`}
+            element={<UserInfo setFlashMessage={setFlashMessage} />}
+          />
+          <Route path="myplans" element={<SavedPlans />} />
+          <Route path="plans" element={<Plans />} />
+          <Route path="workouts" element={<Workouts />} />
+          <Route path="workouts/:workoutId" element={<WorkoutDetail />} />
+          <Route
+            path="newWorkout"
+            element={<NewWorkout setFlashMessage={setFlashMessage} />}
+          />
+          <Route
+            path="newPlan"
+            element={<NewPlan setFlashMessage={setFlashMessage} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

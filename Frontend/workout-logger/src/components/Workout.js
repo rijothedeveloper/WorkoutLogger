@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import workoutImage from "../images/workout.jpeg";
 
 const Workout = ({ workout, addable, handleChange }) => {
@@ -7,7 +8,7 @@ const Workout = ({ workout, addable, handleChange }) => {
   if (!addable) {
     return (
       <div className="card">
-        <a href={"/workouts/" + workout.id}>
+        <Link to={"/workouts/" + workout.id}>
           <figure>
             {workout.image_url ? (
               <img src={workout.image_url} height="200px" />
@@ -18,7 +19,7 @@ const Workout = ({ workout, addable, handleChange }) => {
               <h2>{workout.name}</h2>
             </figcaption>
           </figure>
-        </a>
+        </Link>
       </div>
     );
   } else {

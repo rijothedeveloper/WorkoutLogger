@@ -1,21 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { fetchWorkout } from "../networking/Networking";
+import UserContext from "../UserContext";
 
-const WorkoutDetail = ({ token }) => {
+const WorkoutDetail = () => {
+  const [user] = useContext(UserContext);
   const { workoutId } = useParams();
   const [workout, setWorkout] = useState({});
   useEffect(() => {
     const getWorkout = async () => {
-      if (token) {
-        const w = await fetchWorkout(token, workoutId);
+      if (user.token) {
+        const w = await fetchWorkout(user.token, workoutId);
         setWorkout(w);
       } else {
-        setWorkout([]);
+        // setWorkout([]);
       }
     };
     getWorkout();
-  }, [token]);
+  }, [user.token, workoutId]);
   return <div>{workout.name}</div>;
 };
 

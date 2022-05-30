@@ -1,11 +1,14 @@
 import NavItem from "./NavItem";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
+import UserContext from "../UserContext";
+import { useContext } from "react";
 
-const Navigation = ({ loggedin, onLogout, username }) => {
-  let logginSec;
-  if (!loggedin) {
-    logginSec = (
+const Navigation = ({ onLogout }) => {
+  const [user] = useContext(UserContext);
+  let navSec;
+  if (!user.loggedin) {
+    navSec = (
       <>
         <li>
           <NavItem link="login" />
@@ -16,20 +19,8 @@ const Navigation = ({ loggedin, onLogout, username }) => {
       </>
     );
   } else {
-    logginSec = (
+    navSec = (
       <>
-        <li>
-          <NavItem link="logout" />
-        </li>
-        <li>
-          <NavItem link={"user/" + username} title={username} />
-        </li>
-      </>
-    );
-  }
-  return (
-    <nav>
-      <ul>
         <li class="logo">
           <Link to="/">
             <img src={logo} />
@@ -50,8 +41,18 @@ const Navigation = ({ loggedin, onLogout, username }) => {
         <li>
           <NavItem link="newPlan" title="create Plan" />
         </li>
-        {logginSec}
-      </ul>
+        <li>
+          <NavItem link="logout" />
+        </li>
+        <li>
+          <NavItem link={"user/" + user.username} title={user.username} />
+        </li>
+      </>
+    );
+  }
+  return (
+    <nav>
+      <ul>{navSec}</ul>
     </nav>
   );
 };

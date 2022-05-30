@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { fetchWorkouts } from "../networking/Networking";
 import WorkoutList from "./WorkoutList";
 import { getMuscles, getWorkoutCategories } from "../networking/Networking";
 import WorkoutSearch from "./WorkoutSearch";
+import UserContext from "../UserContext";
 
-const Workouts = ({ token, addable, handleChange }) => {
+const Workouts = ({ addable, handleChange }) => {
+  const [user] = useContext(UserContext);
   const [workouts, setWorkouts] = useState([]);
   const [workoutsOrig, setWorkoutsOrig] = useState([]);
   const [muscles, setMuscles] = useState([]);
@@ -12,24 +14,29 @@ const Workouts = ({ token, addable, handleChange }) => {
 
   useEffect(() => {
     const getAllMuscles = async () => {
-      const m = await getMuscles(token);
-      setMuscles(m);
+      if (user.token) {
+        const m = await getMuscles(user.token);
+        if (m) setMuscles(m);
+      } else {
+      }
     };
     getAllMuscles();
-  }, []);
+  }, [user.token]);
 
   useEffect(() => {
     const getAllCategories = async () => {
-      const c = await getWorkoutCategories(token);
-      setCategories(c);
+      if (user.token) {
+        const c = await getWorkoutCategories(user.token);
+        if (c) setCategories(c);
+      }
     };
     getAllCategories();
-  }, []);
+  }, [user.token]);
 
   useEffect(() => {
     const getWorkots = async () => {
-      if (token) {
-        const workouts = await fetchWorkouts(token);
+      if (user.token) {
+        const workouts = await fetchWorkouts(user.token);
         if (workouts) {
           setWorkouts(workouts);
           setWorkoutsOrig(workouts);
@@ -39,7 +46,7 @@ const Workouts = ({ token, addable, handleChange }) => {
       }
     };
     getWorkots();
-  }, [token]);
+  }, [user.token]);
 
   function onFilter(filter) {
     let w = workoutsOrig;
@@ -57,18 +64,20 @@ const Workouts = ({ token, addable, handleChange }) => {
   }
 
   return (
-    <>
-      <WorkoutSearch
-        muscles={muscles}
-        categories={categories}
-        filter={onFilter}
-      />
-      <WorkoutList
-        workouts={workouts}
-        addable={addable}
-        handleChange={handleChange}
-      />
-    </>
+    user.token && (
+      <>
+        <WorkoutSearch
+          muscles={muscles}
+          categories={categories}
+          filter={onFilter}
+        />
+        <WorkoutList
+          workouts={workouts}
+          addable={addable}
+          handleChange={handleChange}
+        />
+      </>
+    )
   );
 };
 
