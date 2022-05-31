@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { addPlan } from "../networking/Networking";
 import NewPlanForm from "./NewPlanForm";
+import UserContext from "../UserContext";
 
-const NewPlan = ({ token, setFlashMessage }) => {
+const NewPlan = ({ setFlashMessage }) => {
+  const [user] = useContext(UserContext);
   const savePlan = (plan) => {
-    const result = addPlan(token, plan);
+    const result = addPlan(user.token, plan);
     if (result) {
       setFlashMessage({
         show: true,
@@ -19,7 +21,7 @@ const NewPlan = ({ token, setFlashMessage }) => {
       });
     }
   };
-  return <NewPlanForm token={token} savePlan={savePlan} />;
+  return <NewPlanForm savePlan={savePlan} />;
 };
 
 export default NewPlan;

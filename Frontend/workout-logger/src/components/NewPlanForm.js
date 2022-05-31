@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Workouts from "./Workouts";
 
-const NewPlanForm = ({ token, savePlan }) => {
+const NewPlanForm = ({ savePlan }) => {
   const [formData, setFormData] = useState({});
   const [days, setDays] = useState(new Array(7).fill(false));
   const [workouts, setWorkouts] = useState(new Set());
@@ -139,11 +139,7 @@ const NewPlanForm = ({ token, savePlan }) => {
           />
         </label>
       </div>
-      <Workouts
-        token={token}
-        addable={true}
-        handleChange={handleWorkoutChange}
-      />
+      <Workouts addable={true} handleChange={handleWorkoutChange} />
       <input type="submit" value="Submit" />
     </form>
   );
