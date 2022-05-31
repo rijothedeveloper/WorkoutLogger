@@ -18,7 +18,14 @@ const WorkoutDetail = () => {
     };
     getWorkout();
   }, [user.token, workoutId]);
-  return <div>{workout.name}</div>;
+  return (
+    <div>
+      <h2>Workout details</h2>
+      <h3>Name: {workout.name}</h3>
+      <h3>Description: {workout.description}</h3>
+      <img src={workout.image_url}></img>
+    </div>
+  );
 };
 
 export default WorkoutDetail;
