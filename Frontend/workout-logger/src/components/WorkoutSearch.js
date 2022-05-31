@@ -2,10 +2,14 @@ import React, { useState } from "react";
 
 const WorkoutSearch = ({ muscles, categories, filter }) => {
   const muscleOptions = muscles.map((m) => (
-    <option value={m.id}>{m.name}</option>
+    <option value={m.id} key={m.id}>
+      {m.name}
+    </option>
   ));
   const categoryOptions = categories.map((c) => (
-    <option value={c.id}>{c.name}</option>
+    <option value={c.id} key={c.id}>
+      {c.name}
+    </option>
   ));
   const [formData, setFormData] = useState({});
   const onChange = (event) => {
