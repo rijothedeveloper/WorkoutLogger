@@ -110,6 +110,10 @@ class Workout {
   }
 
   async getPlanWorkouts(planId) {
+    const plansresult = await db.query(
+      `SELECT * FROM Plans WHERE id=${planId}`
+    );
+    const plans = plansresult.rows[0];
     const result = await db.query(
       `SELECT * FROM Plan_workouts WHERE planid=${planId}`
     );
@@ -121,7 +125,8 @@ class Workout {
       );
       workouts.push(result.rows[0]);
     }
-    return workouts;
+    plans.workouts = workouts;
+    return plans;
   }
 
   async addWorkout(workout) {
