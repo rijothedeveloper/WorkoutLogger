@@ -81,6 +81,35 @@ input[type="submit"] {
   background-color: var(--secondary-color);
 }
 
+.home {
+  width: 100vw;
+  height: 1000px;
+  display: flex;
+}
+
+.homec {
+  flex-basis: 50%;
+  font-size: xx-large;
+  margin: 16px;
+}
+
+.homec img {
+  width: 100%;
+}
+
+.homec a {
+  padding: 8px 16px;
+  margin: 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--white-color);
+  background-color: var(--secondary-color);
+}
+
+.homec h1 {
+  margin-bottom: 100px;
+}
+
 .logo {
   margin-right: auto;
 }
