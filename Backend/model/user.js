@@ -9,10 +9,11 @@ async function registerUser(
   lastName,
   username,
   password,
-  height = 0,
-  weight = 0
+  height,
+  weight
 ) {
   const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+  let q = `INSERT INTO users (firstname, lastname, username, password, height, weight) VALUES (${firstName}, ${lastName}, ${username}, ${hashedPassword}, ${height}, ${weight}) RETURNING username`;
   const result = await db.query(
     `INSERT INTO users (firstname, lastname, username, password, height, weight) VALUES ($1, $2, $3, $4, $5, $6) RETURNING username`,
     [firstName, lastName, username, hashedPassword, height, weight]

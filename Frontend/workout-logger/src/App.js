@@ -55,11 +55,19 @@ function App() {
         }),
       });
       const response = await result.json();
-      setFlashMessage({
-        show: true,
-        message: "registered " + response.username,
-        color: "green",
-      });
+      if (!response.error) {
+        setFlashMessage({
+          show: true,
+          message: "registered " + response.username,
+          color: "green",
+        });
+      } else {
+        setFlashMessage({
+          show: true,
+          message: response.error.errorMessage,
+          color: "red",
+        });
+      }
     } catch (error) {
       console.log(error);
       setFlashMessage({

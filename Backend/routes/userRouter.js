@@ -27,10 +27,7 @@ userRouter.post("/register", async (req, res, next) => {
     );
     return res.status(201).json(result);
   } catch (error) {
-    const customError = new ExpressError(
-      400,
-      "error in username and password  " + error
-    );
+    const customError = new ExpressError(406, "error in creating new user  ");
     return next(customError);
   }
 });
