@@ -84,16 +84,24 @@ function App() {
         }),
       });
       const res = await response.json();
-      setUser({
-        username: res.username,
-        token: res.token,
-        loggedin: true,
-      });
-      setFlashMessage({
-        show: true,
-        message: "Logged in",
-        color: "green",
-      });
+      if (!res.error) {
+        setUser({
+          username: res.username,
+          token: res.token,
+          loggedin: true,
+        });
+        setFlashMessage({
+          show: true,
+          message: "Logged in",
+          color: "green",
+        });
+      } else {
+        setFlashMessage({
+          show: true,
+          message: res.error.errorMessage,
+          color: "red",
+        });
+      }
     } catch (error) {
       console.log(error);
       setFlashMessage({

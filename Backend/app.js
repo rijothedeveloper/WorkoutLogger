@@ -23,12 +23,12 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // let status;
   const status = err.status ? err.status : 400;
-  const message = err.message;
+  const errorMessage = err.errorMessage;
   let tokenValidity = true;
   if (err.name === "TokenExpiredError") tokenValidity = false;
   return res.status(status).json({
     error: {
-      message: message,
+      errorMessage: errorMessage,
       status: status,
       tokenValidity: tokenValidity,
     },

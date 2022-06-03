@@ -2,6 +2,7 @@ const db = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { jwt_secret, JWT_OPTIONS, BCRYPT_WORK_FACTOR } = require("../config");
+const ExpressError = require("../expressError");
 
 async function registerUser(
   firstName,
@@ -30,10 +31,10 @@ async function loginUser(username, password) {
       // const token = jwt.sign(payload, jwt_secret, JWT_OPTIONS);
       return user;
     } else {
-      throw new ExpressError("Invalid user/password", 400);
+      throw new ExpressError(406, "Invalid password");
     }
   } else {
-    throw new ExpressError("Invalid user/password", 400);
+    throw new ExpressError(406, "Invalid user");
   }
 }
 

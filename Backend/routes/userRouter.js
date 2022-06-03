@@ -57,10 +57,7 @@ userRouter.post("/login", async (req, res, next) => {
       });
     }
   } catch (err) {
-    const customError = new ExpressError(
-      400,
-      "error in username and password field required " + err
-    );
+    const customError = new ExpressError(406, err.errorMessage);
     return next(customError);
   }
 });
