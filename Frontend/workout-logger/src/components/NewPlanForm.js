@@ -139,7 +139,10 @@ const NewPlanForm = ({ savePlan }) => {
           />
         </label>
       </div>
-      <Workouts addable={true} handleChange={handleWorkoutChange} />
+      <div className="box">
+        <h3>Choose the workouts</h3>
+        <Workouts addable={true} handleChange={handleWorkoutChange} />
+      </div>
       <input type="submit" value="Submit" />
     </form>
   );

@@ -26,7 +26,11 @@ const Workout = ({ workout, addable, handleChange }) => {
     return (
       <div className="card cursor">
         <figure>
-          <img src={workoutImage} height="200px" />
+          {workout.image_url ? (
+            <img src={workout.image_url} height="200px" />
+          ) : (
+            <img src={workoutImage} height="200px" />
+          )}
           <figcaption>
             <h2>{workout.name}</h2>
           </figcaption>

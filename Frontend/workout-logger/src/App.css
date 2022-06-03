@@ -144,6 +144,11 @@ nav ul .logo a:hover {
   right: 8px;
 }
 
+.box {
+  border: 1px solid var(--secondary-color);
+  padding: 16px;
+}
+
 @media (min-width: 400px) {
   .card-raw {
     display: flex;
