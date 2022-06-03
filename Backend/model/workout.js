@@ -65,7 +65,7 @@ class Workout {
 
   async addPlan(plan) {
     const result = await db.query(
-      "INSERT INTO plans (name, notes, username, sun, mon, tue, wed, thu, fri, sat) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id",
+      "INSERT INTO plans (name, notes, username, sun, mon, tue, wed, thu, fri, sat, imgurl) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id",
       [
         plan.name,
         plan.notes,
@@ -77,6 +77,7 @@ class Workout {
         plan.thu,
         plan.fri,
         plan.sun,
+        plan.imgUrl,
       ]
     );
     const planId = result.rows[0].id;

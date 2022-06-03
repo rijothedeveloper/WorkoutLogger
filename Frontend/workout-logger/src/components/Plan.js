@@ -6,8 +6,8 @@ const Plan = ({ plan }) => {
     <div className="card">
       <Link to={"/plans/" + plan.id}>
         <figure>
-          {plan.image_url ? (
-            <img src={plan.image_url} height="200px" />
+          {plan.imgurl ? (
+            <img src={plan.imgurl} height="200px" />
           ) : (
             <img src={fitnessImage} height="200px" />
           )}

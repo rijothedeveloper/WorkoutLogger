@@ -73,6 +73,15 @@ const NewPlanForm = ({ savePlan }) => {
           onChange={handleChange}
         />
       </label>
+      <label>
+        Image:
+        <input
+          type="text"
+          name="imgUrl"
+          value={formData.imgUrl}
+          onChange={handleChange}
+        />
+      </label>
       <h3>Choos the days to do exercise</h3>
       <div class="checkArea">
         <label>
