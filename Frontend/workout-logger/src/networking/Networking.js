@@ -44,6 +44,29 @@ export async function fetchWorkouts(token) {
   }
 }
 
+export async function bookmarkPlan(token, planId) {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/workouts/plan/bookmarkPlan",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          authorization: "bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          planId: planId,
+        }),
+      }
+    );
+    const w = await response.json();
+    return w;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function fetchWorkout(token, workoutId) {
   try {
     const response = await fetch(

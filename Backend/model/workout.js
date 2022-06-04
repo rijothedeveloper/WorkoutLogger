@@ -83,10 +83,18 @@ class Workout {
     const planId = result.rows[0].id;
     for (let workoutId of plan.workouts) {
       const result = await db.query(
-        "INSERT INTO plan_workouts (planid, workoutid) values ($1, $2)",
+        "INSERT INTO plan_workouts (planId, workoutid) values ($1, $2)",
         [planId, workoutId]
       );
     }
+    return true;
+  }
+
+  async bookmarkPlan(username, planId) {
+    const result = await db.query(
+      "INSERT INTO saved_plans (username, planid) values ($1, $2)",
+      [username, planId]
+    );
     return true;
   }
 
