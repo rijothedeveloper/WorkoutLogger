@@ -69,9 +69,30 @@ workoutRouter.post(
   }
 );
 
+workoutRouter.delete(
+  "/plan/bookmarkPlan",
+  ensureLoggedIn,
+  async (req, res, next) => {
+    try {
+      const result = await workout.removeBookmarkPlan(
+        req.user.username,
+        req.body.planId
+      );
+      res.json(result);
+    } catch (err) {
+      const error = new ExpressError(406, "error in bookmarking plan");
+      return next(error);
+    }
+  }
+);
+
 workoutRouter.get("/plan/", ensureLoggedIn, async (req, res, next) => {
   try {
-    const plans = await workout.getPlans(req.query.name, req.query.username);
+    const plans = await workout.getPlans(
+      req.query.name,
+      req.query.username,
+      req.user.username
+    );
     return res.json(plans);
   } catch (err) {
     const error = new ExpressError(406, "error in getting plans " + err);

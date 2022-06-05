@@ -98,7 +98,15 @@ class Workout {
     return true;
   }
 
-  async getPlans(planName, username) {
+  async removeBookmarkPlan(username, planId) {
+    const result = await db.query(
+      "DELETE FROM saved_plans WHERE username=$1 AND planid=$2",
+      [username, planId]
+    );
+    return true;
+  }
+
+  async getPlans(planName, username, bookUser) {
     let query = "SELECT * FROM plans";
     let filter = false;
     if (planName) {
@@ -115,7 +123,21 @@ class Workout {
     }
 
     const results = await db.query(query);
-    return results.rows;
+    const plans = results.rows;
+    const bookedResult = await db.query(
+      "select planid from saved_plans where username=$1",
+      [bookUser]
+    );
+    const bookedIdsObj = bookedResult.rows;
+    const bookedIds = bookedIdsObj.map((el) => el.planid);
+    const newPlans = plans.map((p) => {
+      if (bookedIds.includes(p.id)) {
+        p["booked"] = true;
+      } else {
+        p["booked"] = false;
+      }
+    });
+    return plans;
   }
 
   async getBookmarkedPlans(username) {
