@@ -22,11 +22,17 @@ const Plan = ({ plan }) => {
             <img src={fitnessImage} height="200px" />
           )}
         </Link>
+
         <figcaption>
           <h3>{plan.name}</h3>
-          <img src={bookmarkPlusIcon} onClick={bookmarkClicked} />
         </figcaption>
       </figure>
+      <img
+        src={bookmarkPlusIcon}
+        height="30px"
+        onClick={bookmarkClicked}
+        class="iconTop"
+      />
     </div>
   );
 };

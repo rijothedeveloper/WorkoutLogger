@@ -42,8 +42,15 @@ figure {
   max-width: 100%;
   margin: 0px;
   padding: 0px;
-  position: relative;
+  /* position: relative; */
 }
+
+/* figure img {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  opacity: 0.7;
+} */
 
 figCaption {
   background-color: var(--black-color);
@@ -51,6 +58,7 @@ figCaption {
   position: absolute;
   bottom: 0%;
   width: 100%;
+  padding: 16px;
   opacity: 0.7;
 }
 
@@ -132,6 +140,13 @@ nav ul .logo a:hover {
   height: 200px;
   margin-bottom: 10px;
   position: relative;
+}
+
+.card .iconTop {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  margin: 10px;
 }
 
 .checkArea {
