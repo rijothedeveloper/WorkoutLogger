@@ -27,6 +27,25 @@ export async function fetchPlans(token, name = null, username = null) {
   }
 }
 
+export async function fetchbookmarkedPlans(token) {
+  let fetchURL = "http://localhost:3000/workouts/plan/bookmarked/";
+
+  try {
+    const response = await fetch(fetchURL, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        authorization: "bearer " + token,
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    const plans = await response.json();
+    return plans;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function fetchWorkouts(token) {
   try {
     const response = await fetch("http://localhost:3000/workouts/", {

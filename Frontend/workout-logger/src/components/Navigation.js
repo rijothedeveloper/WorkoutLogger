@@ -30,6 +30,9 @@ const Navigation = ({ onLogout }) => {
           <NavItem link="myplans" />
         </li>
         <li>
+          <NavItem link="mybookmarkedplans" title="Bookmarked Plans" />
+        </li>
+        <li>
           <NavItem link="plans" title="All Plans" />
         </li>
         <li>

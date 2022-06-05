@@ -20,6 +20,7 @@ import NewWorkout from "./components/NewWorkout";
 import NewPlan from "./components/NewPlan";
 import UserContext from "./UserContext";
 import PlanDetails from "./components/PlanDetails";
+import BookmarkedPlans from "./components/BookmarkedPlans";
 
 function App() {
   const [flashmessage, setFlashMessage] = useState({
@@ -157,6 +158,7 @@ function App() {
             element={<UserInfo setFlashMessage={setFlashMessage} />}
           />
           <Route path="myplans" element={<SavedPlans />} />
+          <Route path="mybookmarkedplans" element={<BookmarkedPlans />} />
           <Route path="plans" element={<Plans />} />
           <Route path="plans/:planId" element={<PlanDetails />} />
           <Route path="workouts" element={<Workouts />} />

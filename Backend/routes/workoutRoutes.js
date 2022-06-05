@@ -79,6 +79,25 @@ workoutRouter.get("/plan/", ensureLoggedIn, async (req, res, next) => {
   }
 });
 
+workoutRouter.get(
+  "/plan/bookmarked/",
+  ensureLoggedIn,
+  async (req, res, next) => {
+    try {
+      const bookmarkedPlans = await workout.getBookmarkedPlans(
+        req.user.username
+      );
+      return res.json(bookmarkedPlans);
+    } catch (err) {
+      const error = new ExpressError(
+        406,
+        "error in bookmark plan retrival " + err
+      );
+      return next(error);
+    }
+  }
+);
+
 workoutRouter.get("/plan/:planId", ensureLoggedIn, async (req, res, next) => {
   try {
     const workouts = await workout.getPlanWorkouts(req.params.planId);

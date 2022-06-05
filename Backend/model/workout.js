@@ -118,6 +118,18 @@ class Workout {
     return results.rows;
   }
 
+  async getBookmarkedPlans(username) {
+    const result = await db.query(
+      `SELECT 
+      plans.id, plans.name, plans.notes, plans.username, plans.sun, plans.mon, plans.tue, plans.wed, plans.thu, plans.fri, plans.sat, plans.imgurl
+      FROM plans
+      INNER JOIN saved_plans on plans.id = saved_plans.planid
+      WHERE plans.username=$1`,
+      [username]
+    );
+    return result.rows;
+  }
+
   async getPlanWorkouts(planId) {
     const plansresult = await db.query(
       `SELECT * FROM Plans WHERE id=${planId}`
