@@ -14,19 +14,19 @@ const Plan = ({ plan }) => {
   };
   return (
     <div className="card cursor">
-      <figure>
-        <Link to={"/plans/" + plan.id}>
+      <Link to={"/plans/" + plan.id}>
+        <figure>
           {plan.imgurl ? (
             <img src={plan.imgurl} height="200px" />
           ) : (
             <img src={fitnessImage} height="200px" />
           )}
-        </Link>
 
-        <figcaption>
-          <h3>{plan.name}</h3>
-        </figcaption>
-      </figure>
+          <figcaption>
+            <h3>{plan.name}</h3>
+          </figcaption>
+        </figure>
+      </Link>
       <img
         src={bookmarkPlusIcon}
         height="30px"
