@@ -37,12 +37,10 @@ const Workouts = ({ addable, handleChange }) => {
     const getWorkots = async () => {
       if (user.token) {
         const workouts = await fetchWorkouts(user.token);
-        if (workouts) {
+        if (workouts && !workouts.error) {
           setWorkouts(workouts);
           setWorkoutsOrig(workouts);
         }
-      } else {
-        setWorkouts([]);
       }
     };
     getWorkots();

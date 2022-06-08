@@ -12,7 +12,7 @@ const workoutSchema = require("../schemas/addWorkout.json");
 
 workoutRouter.get("/", ensureLoggedIn, async (req, res) => {
   const results = await workout.getAllWorkouts(
-    req.query.category,
+    req.query.equipments,
     req.query.muscles,
     req.query.name
   );

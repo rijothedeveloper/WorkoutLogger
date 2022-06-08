@@ -1,14 +1,14 @@
 const db = require("../db");
 class Workout {
-  async getAllWorkouts(category, muscles, name) {
+  async getAllWorkouts(equipment, muscles, name) {
     let filter = false;
     let query = "SELECT * FROM workout";
-    if (category) {
+    if (equipment) {
       if (!filter) {
         query = query + " where";
       }
       filter = true;
-      query = query + ` category = ${await this.getCategoryId(category)}`;
+      query = query + ` equipment = ${await this.getEquipmentId(equipment)}`;
     }
     if (muscles) {
       if (!filter) {
@@ -28,8 +28,19 @@ class Workout {
       filter = true;
       query += ` name LIKE '%${name}%'`;
     }
-    const results = await db.query(query);
-    return results.rows;
+    const workoutsRes = await db.query(query);
+    const workouts = workoutsRes.rows;
+    for (let workout of workouts) {
+      const muscles = await db.query(
+        `SELECT muscle_id, name FROM workout_muscles INNER JOIN muscles on workout_muscles.muscle_id = muscles.id WHERE workout_id = ${workout.id}`
+      );
+      workout["musles"] = muscles.rows;
+      const equipments = await db.query(
+        `SELECT equipment_id, name FROM workout_equipments INNER JOIN equipments on workout_equipments.equipment_id = equipments.id WHERE workout_id = ${workout.id}`
+      );
+      workout["equipments"] = equipments.rows;
+    }
+    return workouts;
   }
 
   async getWorkout(id) {
@@ -41,14 +52,14 @@ class Workout {
     }
   }
 
-  async getCategoryId(category) {
-    if (!category) return null;
-    const categoryresults = await db.query(
-      `SELECT id FROM workout_category WHERE name=$1`,
-      [category]
+  async getEquipmentId(equipment) {
+    if (!equipment) return null;
+    const equipmentresults = await db.query(
+      `SELECT id FROM equipments WHERE name=$1`,
+      [equipment]
     );
-    if (!categoryresults.rows.length) return null;
-    const categoryId = categoryresults.rows[0].id;
+    if (!equipmentresults.rows.length) return null;
+    const categoryId = equipmentresults.rows[0].id;
     return categoryId;
   }
 
