@@ -51,8 +51,8 @@ const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
       <label>
         Choose equipments:
         <select
-          name="category"
-          value={formData.category}
+          name="equipment"
+          value={formData.equipment}
           onChange={onChangeForm}
         >
           {" "}
