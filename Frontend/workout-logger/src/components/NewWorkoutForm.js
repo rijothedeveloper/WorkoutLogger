@@ -6,7 +6,7 @@ const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
       {m.name}
     </option>
   ));
-  const categoryOptions = equipments.map((c) => (
+  const equipmentsOptions = equipments.map((c) => (
     <option value={c.id} key={c.id}>
       {c.name}
     </option>
@@ -49,14 +49,14 @@ const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
         />
       </label>
       <label>
-        Choose Category:
+        Choose equipments:
         <select
           name="category"
           value={formData.category}
           onChange={onChangeForm}
         >
           {" "}
-          {categoryOptions}{" "}
+          {equipmentsOptions}{" "}
         </select>
       </label>
       <label>
