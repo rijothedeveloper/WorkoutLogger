@@ -4,53 +4,65 @@
   "type": "object",
   "default": {},
   "title": "Root Schema",
-  "required": ["category", "muscle", "name", "description"],
+  "required": ["name", "description", "imageUrl", "muscles", "equipments"],
   "properties": {
-    "category": {
-      "type": ["integer", "string"],
-      "default": 0,
-      "title": "The category Schema",
-      "examples": [1]
-    },
-    "muscle": {
-      "type": ["integer", "string"],
-      "default": 0,
-      "title": "The muscle Schema",
-      "examples": [1]
-    },
     "name": {
       "type": "string",
       "default": "",
       "title": "The name Schema",
-      "examples": ["creative"]
+      "examples": ["workout 222"]
     },
     "description": {
       "type": "string",
       "default": "",
       "title": "The description Schema",
-      "examples": ["fgg"]
+      "examples": ["nothngh here"]
     },
     "imageUrl": {
       "type": "string",
       "default": "",
       "title": "The imageUrl Schema",
-      "examples": ["none"]
+      "examples": [
+        "https://d357mttm70bw7x.cloudfront.net/6d11cb6e-cc67-4510-a182-561140ed0dce.jpg"
+      ]
     },
     "videoUrl": {
       "type": "string",
       "default": "",
       "title": "The videoUrl Schema",
-      "examples": ["none"]
+      "examples": [""]
+    },
+    "muscles": {
+      "type": "array",
+      "default": [],
+      "title": "The muscles Schema",
+      "items": {
+        "type": "string",
+        "title": "A Schema",
+        "examples": ["1", "2", "4"]
+      },
+      "examples": [["1", "2", "4"]]
+    },
+    "equipments": {
+      "type": "array",
+      "default": [],
+      "title": "The equipments Schema",
+      "items": {
+        "type": "string",
+        "title": "A Schema",
+        "examples": ["1", "2"]
+      },
+      "examples": [["1", "2"]]
     }
   },
   "examples": [
     {
-      "category": 1,
-      "muscle": 1,
-      "name": "creative",
-      "description": "fgg",
-      "imageUrl": "none",
-      "videoUrl": "none"
+      "name": "workout 222",
+      "description": "nothngh here",
+      "imageUrl": "https://d357mttm70bw7x.cloudfront.net/6d11cb6e-cc67-4510-a182-561140ed0dce.jpg",
+      "videoUrl": "",
+      "muscles": ["1", "2", "4"],
+      "equipments": ["1", "2"]
     }
   ]
 }

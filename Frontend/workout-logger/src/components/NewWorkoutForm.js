@@ -24,10 +24,7 @@ const NewWorkoutForm = ({ allMuscles, allEquipments, addWorkout }) => {
     </label>
   ));
 
-  const [formData, setFormData] = useState({
-    category: 1,
-    muscle: 1,
-  });
+  const [formData, setFormData] = useState({});
   const [muscles, setMuscles] = useState({});
   const [equipments, setEquipments] = useState({});
 
@@ -61,8 +58,6 @@ const NewWorkoutForm = ({ allMuscles, allEquipments, addWorkout }) => {
     addWorkout(formData);
     setFormData({
       name: "",
-      category: 1,
-      muscle: 1,
       description: "",
       imageUrl: "",
       videoUrl: "",

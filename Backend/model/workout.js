@@ -174,18 +174,25 @@ class Workout {
   }
 
   async addWorkout(workout) {
-    const result = await db.query(
-      "INSERT INTO workout (category, name, muscles, description, image_url, video_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
-      [
-        workout.category,
-        workout.name,
-        workout.muscle,
-        workout.description,
-        workout.imageUrl,
-        workout.videoUrl,
-      ]
+    let result = await db.query(
+      "INSERT INTO workout (name, description, image_url, video_url) VALUES ($1, $2, $3, $4) RETURNING id",
+      [workout.name, workout.description, workout.imageUrl, workout.videoUrl]
     );
     const workoutId = result.rows[0];
+    for (let muscleId of workout.muscles) {
+      result = await db.query(
+        "INSERT INTO workout_muscles (workout_id, muscle_id) VALUES ($1,$2)",
+        [workoutId.id, muscleId]
+      );
+    }
+
+    for (let equipmentId of workout.equipments) {
+      result = await db.query(
+        "INSERT INTO workout_equipments (workout_id, equipment_id) VALUES ($1,$2)",
+        [workoutId.id, equipmentId]
+      );
+    }
+
     return workoutId;
   }
 
@@ -193,11 +200,6 @@ class Workout {
     const result = await db.query(`SELECT * FROM muscles`);
     return result.rows;
   }
-
-  // async getWorkoutCategory() {
-  //   const result = await db.query(`SELECT * FROM workout_category`);
-  //   return result.rows;
-  // }
 
   async getAllWorkoutEquipments() {
     const result = await db.query(`SELECT * FROM equipments`);

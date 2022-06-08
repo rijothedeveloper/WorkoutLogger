@@ -265,7 +265,7 @@ export async function addWorkout(token, workout) {
     const result = await response.json();
     return result;
   } catch (err) {
-    return err;
+    return { error: err };
   }
 }
 
