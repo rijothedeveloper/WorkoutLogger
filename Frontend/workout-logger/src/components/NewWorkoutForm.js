@@ -1,21 +1,51 @@
 import React, { useState } from "react";
 
-const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
-  const muscleOptions = muscles.map((m) => (
-    <option value={m.id} key={m.id}>
+const NewWorkoutForm = ({ allMuscles, allEquipments, addWorkout }) => {
+  const muscleOptions = allMuscles.map((m) => (
+    <label>
       {m.name}
-    </option>
+      <input
+        type="checkbox"
+        name={m.name}
+        value={m.id}
+        onChange={handleMuscleCheck}
+      />
+    </label>
   ));
-  const equipmentsOptions = equipments.map((c) => (
-    <option value={c.id} key={c.id}>
-      {c.name}
-    </option>
+  const equipmentsOptions = allEquipments.map((e) => (
+    <label>
+      {e.name}
+      <input
+        type="checkbox"
+        name={e.name}
+        value={e.id}
+        onChange={handleEquipmentCheck}
+      />
+    </label>
   ));
 
   const [formData, setFormData] = useState({
     category: 1,
     muscle: 1,
   });
+  const [muscles, setMuscles] = useState({});
+  const [equipments, setEquipments] = useState({});
+
+  function handleMuscleCheck(event) {
+    console.log("checked");
+    setMuscles({
+      ...muscles,
+      [event.target.value]: event.target.checked,
+    });
+  }
+
+  function handleEquipmentCheck(event) {
+    console.log("checked");
+    setEquipments({
+      ...equipments,
+      [event.target.value]: event.target.checked,
+    });
+  }
 
   const onChangeForm = (event) => {
     setFormData({
@@ -26,6 +56,8 @@ const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    formData["muscles"] = createMuscleArray(muscles);
+    formData["equipments"] = createEquipmentsArray(equipments);
     addWorkout(formData);
     setFormData({
       name: "",
@@ -37,6 +69,26 @@ const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
     });
   };
 
+  function createMuscleArray(muscles) {
+    const muscleArr = [];
+    for (let muscleId in muscles) {
+      if (muscles[muscleId]) {
+        muscleArr.push(muscleId);
+      }
+    }
+    return muscleArr;
+  }
+
+  function createEquipmentsArray(equipments) {
+    const equipmentArr = [];
+    for (let equipmentId in equipments) {
+      if (equipments[equipmentId]) {
+        equipmentArr.push(equipmentId);
+      }
+    }
+    return equipmentArr;
+  }
+
   return (
     <form method="post" onSubmit={onSubmit}>
       <label>
@@ -47,24 +99,6 @@ const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
           value={formData.name}
           onChange={onChangeForm}
         />
-      </label>
-      <label>
-        Choose equipments:
-        <select
-          name="equipment"
-          value={formData.equipment}
-          onChange={onChangeForm}
-        >
-          {" "}
-          {equipmentsOptions}{" "}
-        </select>
-      </label>
-      <label>
-        Choose Muscle:
-        <select name="muscle" value={formData.muscle} onChange={onChangeForm}>
-          {" "}
-          {muscleOptions}{" "}
-        </select>
       </label>
       <label>
         Description:
@@ -93,6 +127,10 @@ const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
           onChange={onChangeForm}
         />
       </label>
+      <h3>Choose Muscle:</h3>
+      {muscleOptions}
+      <h3>Choose equipments:</h3>
+      {equipmentsOptions}
       <input type="submit" value="Submit" />
     </form>
   );

@@ -47,8 +47,8 @@ const NewWorkout = ({ setFlashMessage }) => {
 
   return (
     <NewWorkoutForm
-      muscles={muscles}
-      equipments={equipments}
+      allMuscles={muscles}
+      allEquipments={equipments}
       addWorkout={saveWorkout}
     />
   );
