@@ -146,9 +146,10 @@ class Workout {
       plans.id, plans.name, plans.notes, plans.username, plans.sun, plans.mon, plans.tue, plans.wed, plans.thu, plans.fri, plans.sat, plans.imgurl
       FROM plans
       INNER JOIN saved_plans on plans.id = saved_plans.planid
-      WHERE plans.username=$1`,
+      WHERE saved_plans.username=$1`,
       [username]
     );
+    const bookPlans = result.rows.map((p) => (p["booked"] = true));
     return result.rows;
   }
 

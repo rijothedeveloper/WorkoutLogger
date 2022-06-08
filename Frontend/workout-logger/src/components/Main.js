@@ -5,6 +5,7 @@ import UserContext from "../UserContext";
 import { useContext } from "react";
 import NavItem from "./NavItem";
 import fitImg from "../images/fitnessbg.jpeg";
+import BookmarkedPlans from "./BookmarkedPlans";
 
 const Main = () => {
   const [user] = useContext(UserContext);
@@ -13,6 +14,7 @@ const Main = () => {
       return (
         <>
           <SavedPlans />
+          <BookmarkedPlans />
           <Plans />
           <Workouts />
         </>

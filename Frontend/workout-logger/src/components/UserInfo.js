@@ -46,7 +46,7 @@ const UserInfo = ({ setFlashMessage }) => {
 
   const saveUser = async () => {
     const result = await saveUserInfo(userContext.token, formData);
-    if (result) {
+    if (result && !result.error) {
       setFlashMessage({
         show: true,
         message: "Save user sucessfully ",

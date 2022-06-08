@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPlan } from "../networking/Networking";
 import UserContext from "../UserContext";
+import PlansInfo from "./PlansInfo";
 
 const PlanDetails = () => {
   const [user] = useContext(UserContext);
@@ -32,7 +33,8 @@ const PlanDetails = () => {
       <h3>Friday: {plan.fri ? "Yes" : "No"}</h3>
       <h3>Saturday: {plan.sat ? "Yes" : "No"}</h3>
       <h3>workouts</h3>
-      {workElem}
+
+      <PlansInfo plan={workElem} />
     </div>
   );
 };

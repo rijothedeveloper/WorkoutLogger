@@ -80,7 +80,7 @@ userRouter.get(
   }
 );
 
-userRouter.post(
+userRouter.patch(
   "/:username",
   ensureLoggedIn,
   ensureSameUser,
