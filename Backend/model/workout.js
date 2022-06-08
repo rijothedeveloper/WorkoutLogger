@@ -194,8 +194,13 @@ class Workout {
     return result.rows;
   }
 
-  async getWorkoutCategory() {
-    const result = await db.query(`SELECT * FROM workout_category`);
+  // async getWorkoutCategory() {
+  //   const result = await db.query(`SELECT * FROM workout_category`);
+  //   return result.rows;
+  // }
+
+  async getAllWorkoutEquipments() {
+    const result = await db.query(`SELECT * FROM equipments`);
     return result.rows;
   }
 }

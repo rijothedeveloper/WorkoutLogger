@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-const NewWorkoutForm = ({ muscles, categories, addWorkout }) => {
+const NewWorkoutForm = ({ muscles, equipments, addWorkout }) => {
   const muscleOptions = muscles.map((m) => (
     <option value={m.id} key={m.id}>
       {m.name}
     </option>
   ));
-  const categoryOptions = categories.map((c) => (
+  const categoryOptions = equipments.map((c) => (
     <option value={c.id} key={c.id}>
       {c.name}
     </option>

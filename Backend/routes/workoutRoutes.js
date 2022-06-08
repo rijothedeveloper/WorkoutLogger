@@ -142,15 +142,32 @@ workoutRouter.get("/muscles", ensureLoggedIn, async (req, res, next) => {
   }
 });
 
+// workoutRouter.get(
+//   "/workoutCategories",
+//   ensureLoggedIn,
+//   async (req, res, next) => {
+//     try {
+//       const categories = await workout.getWorkoutCategory();
+//       return res.json(categories);
+//     } catch (err) {
+//       const error = new ExpressError(400, "problem retriving muscles " + err);
+//       return next(error);
+//     }
+//   }
+// );
+
 workoutRouter.get(
-  "/workoutCategories",
+  "/workoutEquipments",
   ensureLoggedIn,
   async (req, res, next) => {
     try {
-      const categories = await workout.getWorkoutCategory();
-      return res.json(categories);
+      const equipments = await workout.getAllWorkoutEquipments();
+      return res.json(equipments);
     } catch (err) {
-      const error = new ExpressError(400, "problem retriving muscles " + err);
+      const error = new ExpressError(
+        400,
+        "problem retriving equipments " + err
+      );
       return next(error);
     }
   }

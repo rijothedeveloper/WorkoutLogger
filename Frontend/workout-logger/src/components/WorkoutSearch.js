@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-const WorkoutSearch = ({ muscles, categories, filter }) => {
+const WorkoutSearch = ({ muscles, equipments, filter }) => {
   const muscleOptions = muscles.map((m) => (
     <option value={m.id} key={m.id}>
       {m.name}
     </option>
   ));
-  const categoryOptions = categories.map((c) => (
-    <option value={c.id} key={c.id}>
-      {c.name}
+  const equipmentsOptions = equipments.map((e) => (
+    <option value={e.id} key={e.id}>
+      {e.name}
     </option>
   ));
   const [formData, setFormData] = useState({});
@@ -32,10 +32,10 @@ const WorkoutSearch = ({ muscles, categories, filter }) => {
         />
       </label>
       <label>
-        Choose Category:
-        <select name="category" value={formData.category} onChange={onChange}>
+        Choose equipment:
+        <select name="equipment" value={formData.equipment} onChange={onChange}>
           <option />
-          {categoryOptions}
+          {equipmentsOptions}
         </select>
       </label>
       <label>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { fetchWorkouts } from "../networking/Networking";
 import WorkoutList from "./WorkoutList";
-import { getMuscles, getWorkoutCategories } from "../networking/Networking";
+import { getMuscles, getAllWorkoutEquipments } from "../networking/Networking";
 import WorkoutSearch from "./WorkoutSearch";
 import UserContext from "../UserContext";
 
@@ -10,7 +10,7 @@ const Workouts = ({ addable, handleChange }) => {
   const [workouts, setWorkouts] = useState([]);
   const [workoutsOrig, setWorkoutsOrig] = useState([]);
   const [muscles, setMuscles] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [equipments, setEquipments] = useState([]);
 
   useEffect(() => {
     const getAllMuscles = async () => {
@@ -24,13 +24,13 @@ const Workouts = ({ addable, handleChange }) => {
   }, [user.token]);
 
   useEffect(() => {
-    const getAllCategories = async () => {
+    const getAllEquipments = async () => {
       if (user.token) {
-        const c = await getWorkoutCategories(user.token);
-        if (c) setCategories(c);
+        const e = await getAllWorkoutEquipments(user.token);
+        if (e) setEquipments(e);
       }
     };
-    getAllCategories();
+    getAllEquipments();
   }, [user.token]);
 
   useEffect(() => {
@@ -57,8 +57,8 @@ const Workouts = ({ addable, handleChange }) => {
       w = w.filter((e) => e.muscles == filter.muscles);
     }
 
-    if (filter.category) {
-      w = w.filter((e) => e.category == filter.category);
+    if (filter.equipment) {
+      w = w.filter((e) => e.equipment == filter.equipment);
     }
     setWorkouts(w);
   }
@@ -68,7 +68,7 @@ const Workouts = ({ addable, handleChange }) => {
       <>
         <WorkoutSearch
           muscles={muscles}
-          categories={categories}
+          equipments={equipments}
           filter={onFilter}
         />
         <WorkoutList

@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
   addWorkout,
+  getAllWorkoutEquipments,
   getMuscles,
-  getWorkoutCategories,
 } from "../networking/Networking";
 import NewWorkoutForm from "./NewWorkoutForm";
 import UserContext from "../UserContext";
 
 const NewWorkout = ({ setFlashMessage }) => {
   const [muscles, setMuscles] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [equipments, setEquipments] = useState([]);
   const [user] = useContext(UserContext);
 
   useEffect(() => {
@@ -21,11 +21,11 @@ const NewWorkout = ({ setFlashMessage }) => {
   }, []);
 
   useEffect(() => {
-    const getAllCategories = async () => {
-      const c = await getWorkoutCategories(user.token);
-      setCategories(c);
+    const getAllEquipments = async () => {
+      const e = await getAllWorkoutEquipments(user.token);
+      setEquipments(e);
     };
-    getAllCategories();
+    getAllEquipments();
   }, []);
 
   const saveWorkout = async (formData) => {
@@ -48,7 +48,7 @@ const NewWorkout = ({ setFlashMessage }) => {
   return (
     <NewWorkoutForm
       muscles={muscles}
-      categories={categories}
+      equipments={equipments}
       addWorkout={saveWorkout}
     />
   );

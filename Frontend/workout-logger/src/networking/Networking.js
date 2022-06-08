@@ -211,10 +211,30 @@ export async function getMuscles(token) {
   }
 }
 
-export async function getWorkoutCategories(token) {
+// export async function getWorkoutCategories(token) {
+//   try {
+//     const response = await fetch(
+//       "http://192.168.86.25:3001/workouts/workoutCategories",
+//       {
+//         method: "GET",
+//         mode: "cors",
+//         headers: {
+//           authorization: "bearer " + token,
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+//     const result = await response.json();
+//     return result;
+//   } catch (error) {
+//     return error;
+//   }
+// }
+
+export async function getAllWorkoutEquipments(token) {
   try {
     const response = await fetch(
-      "http://192.168.86.25:3001/workouts/workoutCategories",
+      "http://192.168.86.25:3001/workouts/workoutEquipments",
       {
         method: "GET",
         mode: "cors",
