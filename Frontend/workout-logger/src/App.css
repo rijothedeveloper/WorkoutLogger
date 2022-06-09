@@ -80,7 +80,7 @@ form input {
 
 form input[type="checkbox"] {
   display: inline-block;
-  margin-left: 16px;
+  margin-left: 8px;
 }
 
 input[type="submit"] {
@@ -219,6 +219,13 @@ nav ul .logo a:hover {
 .box {
   border: 1px solid var(--secondary-color);
   padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.inline-options {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 400px) {

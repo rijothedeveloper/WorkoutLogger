@@ -122,10 +122,14 @@ const NewWorkoutForm = ({ allMuscles, allEquipments, addWorkout }) => {
           onChange={onChangeForm}
         />
       </label>
-      <h3>Choose Muscle:</h3>
-      {muscleOptions}
-      <h3>Choose equipments:</h3>
-      {equipmentsOptions}
+      <div className="box">
+        <h3>Choose Muscle:</h3>
+        <div className="inline-options">{muscleOptions}</div>
+      </div>
+      <div className="box">
+        <h3>Choose equipments:</h3>
+        <div className="inline-options">{equipmentsOptions}</div>
+      </div>
       <input type="submit" value="Submit" />
     </form>
   );
