@@ -46,7 +46,16 @@ class Workout {
   async getWorkout(id) {
     const result = await db.query(`SELECT * FROM workout WHERE id=$1`, [id]);
     if (result.rows.length > 0) {
-      return result.rows[0];
+      const workout = result.rows[0];
+      const muscles = await db.query(
+        `SELECT muscle_id, name FROM workout_muscles INNER JOIN muscles on workout_muscles.muscle_id = muscles.id WHERE workout_id = ${workout.id}`
+      );
+      workout["musles"] = muscles.rows;
+      const equipments = await db.query(
+        `SELECT equipment_id, name FROM workout_equipments INNER JOIN equipments on workout_equipments.equipment_id = equipments.id WHERE workout_id = ${workout.id}`
+      );
+      workout["equipments"] = equipments.rows;
+      return workout;
     } else {
       return false;
     }

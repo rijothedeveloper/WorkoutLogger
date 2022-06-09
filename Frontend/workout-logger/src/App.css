@@ -233,6 +233,9 @@ nav ul .logo a:hover {
   flex-direction: column;
 }
 
+.detail-container {
+}
+
 @media (min-width: 400px) {
   .card-raw {
     display: flex;
@@ -274,6 +277,13 @@ nav ul .logo a:hover {
   nav ul {
     justify-content: center;
     gap: 2%;
+  }
+
+  .detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px;
   }
 }
 
