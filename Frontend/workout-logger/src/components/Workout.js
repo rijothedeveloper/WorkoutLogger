@@ -19,10 +19,9 @@ const Workout = ({ workout, addable, handleChange }) => {
         ) : (
           <img src={workoutImage} />
         )}
-        <a href={"/workouts/" + workout.id}>
-          VIEW DETAILS
-          {/* <button class="cursor">VIEW DETAILS</button> */}
-        </a>
+        <Link to={"/workouts/" + workout.id}>
+          <button class="cursor">VIEW DETAILS</button>
+        </Link>
       </div>
     );
   } else {

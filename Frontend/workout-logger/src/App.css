@@ -263,6 +263,10 @@ nav ul .logo a:hover {
     color: var(--white-color);
   }
 
+  .workout-raw button:hover {
+    background-color: #cb1314;
+  }
+
   .card {
     flex-basis: 45%;
   }
