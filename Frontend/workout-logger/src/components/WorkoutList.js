@@ -13,7 +13,7 @@ const WorkoutList = ({ workouts, addable, handleChange }) => {
   return (
     <div>
       <h2>Workouts sec</h2>
-      <div className="card-raw">{workoutElments}</div>
+      <div className="card-column">{workoutElments}</div>
     </div>
   );
 };

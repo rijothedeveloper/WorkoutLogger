@@ -228,12 +228,39 @@ nav ul .logo a:hover {
   flex-wrap: wrap;
 }
 
+.card-column {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 400px) {
   .card-raw {
     display: flex;
     gap: 4%;
     flex-flow: row wrap;
     justify-content: flex-start;
+  }
+
+  .workout-raw {
+    display: flex;
+    border-bottom: 1px solid grey;
+    height: 200px;
+    padding: 16px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .workout-raw img {
+    height: 100%;
+  }
+
+  .workout-raw button {
+    background-color: var(--secondary-color);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border-color: var(--secondary-color);
+    color: var(--white-color);
   }
 
   .card {

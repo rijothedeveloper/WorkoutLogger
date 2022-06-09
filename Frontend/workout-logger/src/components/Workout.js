@@ -7,24 +7,30 @@ const Workout = ({ workout, addable, handleChange }) => {
   };
   if (!addable) {
     return (
-      <div className="card">
-        <Link to={"/workouts/" + workout.id}>
-          <figure>
-            {workout.image_url ? (
-              <img src={workout.image_url} height="200px" />
-            ) : (
-              <img src={workoutImage} height="200px" />
-            )}
-            <figcaption>
-              <h2>{workout.name}</h2>
-            </figcaption>
-          </figure>
-        </Link>
+      <div className="workout-raw">
+        <div className="info">
+          <h2>{workout.name}</h2>
+          <h3>Equipment:</h3>
+          <h3>Primary Muscles:</h3>
+        </div>
+
+        {workout.image_url ? (
+          <img src={workout.image_url} />
+        ) : (
+          <img src={workoutImage} />
+        )}
+        <a href={"/workouts/" + workout.id}>
+          VIEW DETAILS
+          {/* <button class="cursor">VIEW DETAILS</button> */}
+        </a>
       </div>
     );
   } else {
     return (
-      <div className="card cursor">
+      <div className="workout-raw">
+        <div className="info">
+          <h2>{workout.name}</h2>
+        </div>
         <figure>
           {workout.image_url ? (
             <img src={workout.image_url} height="200px" />
