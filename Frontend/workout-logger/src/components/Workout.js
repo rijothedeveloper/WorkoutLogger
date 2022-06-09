@@ -5,13 +5,22 @@ const Workout = ({ workout, addable, handleChange }) => {
   const handleWorkoutChange = (event) => {
     handleChange(event.target.value, event.target.checked);
   };
+  let muscleElm;
+  if (workout.musles) {
+    muscleElm = workout.musles.map((m) => m.name);
+  }
+
+  let equipElm;
+  if (workout.equipments) {
+    equipElm = workout.equipments.map((e) => e.name);
+  }
   if (!addable) {
     return (
       <div className="workout-raw">
         <div className="info">
           <h2>{workout.name}</h2>
-          <h3>Equipment:</h3>
-          <h3>Primary Muscles:</h3>
+          <h3>Equipment: {equipElm} </h3>
+          <h3>Primary Muscles: {muscleElm} </h3>
         </div>
 
         {workout.image_url ? (
