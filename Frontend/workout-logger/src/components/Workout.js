@@ -50,7 +50,15 @@ const Workout = ({ workout, addable, handleChange }) => {
         ) : (
           <img src={workoutImage} />
         )}
-        <img src={plusIcon} id="addButton" class="cursor" alt="add or remove" />
+        <label class="mainCheck">
+          <input
+            id="customCheck"
+            type="checkbox"
+            value={workout.id}
+            onChange={handleWorkoutChange}
+          />
+          <span class="w3docs"></span>
+        </label>
       </div>
     );
   }

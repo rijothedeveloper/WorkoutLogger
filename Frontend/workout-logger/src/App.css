@@ -261,6 +261,80 @@ nav ul .logo a:hover {
   margin-bottom: 16px;
 }
 
+.main {
+  display: block;
+  position: relative;
+  padding-left: 45px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* checkbox styles */
+
+.mainCheck {
+  display: block;
+  position: relative;
+  padding-left: 45px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#customCheck {
+  visibility: hidden;
+}
+
+.w3docs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: white;
+}
+
+/* Specify the background color to be shown when hovering over checkbox */
+.mainCheck:hover input ~ .w3docs {
+  background-color: gray;
+}
+/* Specify the background color to be shown when checkbox is active */
+.mainCheck input:active ~ .w3docs {
+  background-color: black;
+}
+/* Specify the background color to be shown when checkbox is checked */
+.mainCheck input:checked ~ .w3docs {
+  background-color: orange;
+}
+
+/* Checkmark to be shown in checkbox */
+/* It is not be shown when not checked */
+.w3docs:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+/* Display checkmark when checked */
+.mainCheck input:checked ~ .w3docs:after {
+  display: block;
+}
+
+/* Styling the checkmark using webkit */
+/* Rotated the rectangle by 45 degree and 
+      showing only two border to make it look
+      like a tickmark */
+.mainCheck .w3docs:after {
+  left: 8px;
+  bottom: 5px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
 @media (min-width: 400px) {
   .card-raw {
     display: flex;
@@ -275,12 +349,14 @@ nav ul .logo a:hover {
     height: 200px;
     padding: 16px;
     margin-bottom: 10px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
   }
 
   .workout-raw img {
     height: 100%;
+    margin-left: auto;
+    margin-right: 64px;
   }
 
   .workout-raw button {
