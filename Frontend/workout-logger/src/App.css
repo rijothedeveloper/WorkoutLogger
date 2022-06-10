@@ -91,6 +91,15 @@ input[type="submit"] {
   background-color: var(--secondary-color);
 }
 
+.searchBox {
+  margin: 16px;
+}
+
+.searchBox label,
+.searchBox input {
+  display: inline;
+}
+
 .home {
   width: 100vw;
   height: 1000px;
@@ -314,6 +323,12 @@ nav ul .logo a:hover {
     gap: 32px;
     padding: 32px;
     margin-top: 64px;
+  }
+
+  #addButton {
+    width: 32px;
+    height: 32px;
+    /* background: url("images//plus64.png") 10px 10px no-repeat; */
   }
 }
 
