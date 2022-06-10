@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchbookmarkedPlans } from "../networking/Networking";
 import UserContext from "../UserContext";
 import PlansInfo from "./PlansInfo";
@@ -6,6 +7,11 @@ import PlansInfo from "./PlansInfo";
 const BookmarkedPlans = () => {
   const [plans, setPlans] = useState([]);
   const [user] = useContext(UserContext);
+  const navigate = useNavigate();
+
+  if (!user.token) {
+    navigate("/");
+  }
 
   useEffect(() => {
     const getPlans = async () => {

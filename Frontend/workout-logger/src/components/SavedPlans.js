@@ -10,6 +10,10 @@ function SavedPlans() {
   const [user] = useContext(UserContext);
   const navigate = useNavigate();
 
+  if (!user.token) {
+    navigate("/");
+  }
+
   useEffect(() => {
     const getPlans = async () => {
       if (user.token) {

@@ -6,11 +6,17 @@ import {
 } from "../networking/Networking";
 import NewWorkoutForm from "./NewWorkoutForm";
 import UserContext from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const NewWorkout = ({ setFlashMessage }) => {
   const [muscles, setMuscles] = useState([]);
   const [equipments, setEquipments] = useState([]);
   const [user] = useContext(UserContext);
+  const navigate = useNavigate();
+
+  if (!user.token) {
+    navigate("/");
+  }
 
   useEffect(() => {
     const getAllMuscles = async () => {

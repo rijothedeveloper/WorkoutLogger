@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchWorkout } from "../networking/Networking";
 import UserContext from "../UserContext";
 
@@ -7,6 +7,11 @@ const WorkoutDetail = () => {
   const [user] = useContext(UserContext);
   const { workoutId } = useParams();
   const [workout, setWorkout] = useState({});
+  const navigate = useNavigate();
+
+  if (!user.token) {
+    navigate("/");
+  }
   useEffect(() => {
     const getWorkout = async () => {
       if (user.token) {

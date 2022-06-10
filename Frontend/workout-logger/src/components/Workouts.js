@@ -4,6 +4,7 @@ import WorkoutList from "./WorkoutList";
 import { getMuscles, getAllWorkoutEquipments } from "../networking/Networking";
 import WorkoutSearch from "./WorkoutSearch";
 import UserContext from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Workouts = ({ addable, handleChange }) => {
   const [user] = useContext(UserContext);
@@ -11,6 +12,11 @@ const Workouts = ({ addable, handleChange }) => {
   const [workoutsOrig, setWorkoutsOrig] = useState([]);
   const [muscles, setMuscles] = useState([]);
   const [equipments, setEquipments] = useState([]);
+  const navigate = useNavigate();
+
+  if (!user.token) {
+    navigate("/");
+  }
 
   useEffect(() => {
     const getAllMuscles = async () => {

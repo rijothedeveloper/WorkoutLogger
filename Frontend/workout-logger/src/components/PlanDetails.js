@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchPlan } from "../networking/Networking";
 import UserContext from "../UserContext";
 import PlansInfo from "./PlansInfo";
@@ -8,6 +8,12 @@ const PlanDetails = () => {
   const [user] = useContext(UserContext);
   const { planId } = useParams();
   const [plan, setPlan] = useState({});
+  const navigate = useNavigate();
+
+  if (!user.token) {
+    navigate("/");
+  }
+
   useEffect(() => {
     const fetchPlanDetails = async () => {
       const planDetails = await fetchPlan(user.token, planId);

@@ -1,10 +1,16 @@
 import { fetchUserInfo, saveUserInfo } from "../networking/Networking";
 import { useEffect, useState, useContext } from "react";
 import UserContext from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const UserInfo = ({ setFlashMessage }) => {
   const [user, setUser] = useState("");
   const [userContext] = useContext(UserContext);
+  const navigate = useNavigate();
+
+  if (!user.token) {
+    navigate("/");
+  }
   useEffect(() => {
     const getUserInfo = async () => {
       if (userContext.token) {

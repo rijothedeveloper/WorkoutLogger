@@ -8,6 +8,12 @@ const Plans = () => {
   const [plans, setPlans] = useState([]);
   const [user] = useContext(UserContext);
   const navigate = useNavigate();
+
+  // navigate to home if user is not logged in or token expaired
+  if (!user.token) {
+    navigate("/");
+  }
+
   useEffect(() => {
     const getPlans = async () => {
       if (user.token) {
