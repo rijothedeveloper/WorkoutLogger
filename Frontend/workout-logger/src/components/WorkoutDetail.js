@@ -31,13 +31,22 @@ const WorkoutDetail = () => {
 
   return (
     <div class="detail-container">
-      <h2>{workout.name}</h2>
-      <img src={workout.image_url} alt={workout.name}></img>
-      <h3>Description: {workout.description}</h3>
-      <h3>MUSCLE GROUPS</h3>
-      {muscleElm}
-      <h3>EQUIPMENT</h3>
-      {equipElm}
+      <div class="details">
+        <h2>{workout.name}</h2>
+        <img src={workout.image_url} alt={workout.name}></img>
+        <h3>{(workout.name + " benefits").toUpperCase()} </h3>
+        <h3>{workout.description}</h3>
+      </div>
+      <div class="muslegroup">
+        <div class="musle-container">
+          <h3>MUSCLE GROUPS</h3>
+          {muscleElm}
+        </div>
+        <div class="musle-container">
+          <h3>EQUIPMENT</h3>
+          {equipElm}
+        </div>
+      </div>
     </div>
   );
 };
