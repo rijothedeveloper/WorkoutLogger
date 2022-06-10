@@ -225,6 +225,16 @@ class Workout {
     const result = await db.query(`SELECT * FROM equipments`);
     return result.rows;
   }
+
+  async getAllLevels() {
+    const result = await db.query(`SELECT * FROM plan_levels`);
+    return result.rows;
+  }
+
+  async getAllTags() {
+    const result = await db.query(`SELECT * FROM tags`);
+    return result.rows;
+  }
 }
 
 module.exports = Workout;

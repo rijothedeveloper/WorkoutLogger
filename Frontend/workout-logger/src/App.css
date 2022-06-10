@@ -70,7 +70,8 @@ form label {
   color: var(--white-color);
 }
 
-form input {
+form input,
+select {
   display: block;
   background-color: #1e1f23;
   border: 1px solid var(--secondary-color);
@@ -227,7 +228,8 @@ nav ul .logo a:hover {
 
 .box {
   border: 1px solid var(--secondary-color);
-  padding: 16px;
+  background-color: #242933;
+  padding: 32px;
   margin-top: 16px;
   margin-bottom: 16px;
 }
@@ -240,6 +242,9 @@ nav ul .logo a:hover {
 .card-column {
   display: flex;
   flex-direction: column;
+}
+.card-column :nth-child(odd) {
+  background-color: #242933;
 }
 
 .group::before {
@@ -345,11 +350,9 @@ nav ul .logo a:hover {
 
   .workout-raw {
     display: flex;
-    border-bottom: 1px solid grey;
     height: 200px;
     padding: 16px;
     margin-bottom: 10px;
-    /* justify-content: space-between; */
     align-items: center;
   }
 
@@ -359,7 +362,7 @@ nav ul .logo a:hover {
     margin-right: 64px;
   }
 
-  .workout-raw button {
+  #detailButton {
     background-color: var(--secondary-color);
     padding: 8px 16px;
     border-radius: 8px;
@@ -367,7 +370,7 @@ nav ul .logo a:hover {
     color: var(--white-color);
   }
 
-  .workout-raw button:hover {
+  #detailButton:hover {
     background-color: #cb1314;
   }
 

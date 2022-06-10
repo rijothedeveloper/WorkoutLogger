@@ -173,6 +173,26 @@ workoutRouter.get(
   }
 );
 
+workoutRouter.get("/levels", ensureLoggedIn, async (req, res, next) => {
+  try {
+    const levels = await workout.getAllLevels();
+    return res.json(levels);
+  } catch (err) {
+    const error = new ExpressError(400, "problem retriving equipments " + err);
+    return next(error);
+  }
+});
+
+workoutRouter.get("/tags", ensureLoggedIn, async (req, res, next) => {
+  try {
+    const tags = await workout.getAllTags();
+    return res.json(tags);
+  } catch (err) {
+    const error = new ExpressError(400, "problem retriving equipments " + err);
+    return next(error);
+  }
+});
+
 workoutRouter.get("/:workoutId", ensureLoggedIn, async (req, res) => {
   const result = await workout.getWorkout(req.params.workoutId);
   return res.json(result);

@@ -32,7 +32,9 @@ const Workout = ({ workout, addable, handleChange }) => {
           <img src={workoutImage} />
         )}
         <Link to={"/workouts/" + workout.id}>
-          <button class="cursor">VIEW DETAILS</button>
+          <button className="cursor" id="detailButton">
+            VIEW DETAILS
+          </button>
         </Link>
       </div>
     );

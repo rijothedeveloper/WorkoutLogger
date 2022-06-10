@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Workouts from "./Workouts";
 
-const NewPlanForm = ({ savePlan }) => {
+const NewPlanForm = ({ savePlan, levels, tags }) => {
   const [formData, setFormData] = useState({});
-  const [days, setDays] = useState(new Array(7).fill(false));
   const [workouts, setWorkouts] = useState(new Set());
 
   const handleChange = (event) => {
@@ -11,13 +10,6 @@ const NewPlanForm = ({ savePlan }) => {
       ...formData,
       [event.target.name]: event.target.value,
     });
-  };
-
-  const handleCheckedChange = (position) => {
-    const updatedDays = days.map((item, index) =>
-      index === position ? !item : item
-    );
-    setDays(updatedDays);
   };
 
   const handleWorkoutChange = (id, add) => {
@@ -32,19 +24,9 @@ const NewPlanForm = ({ savePlan }) => {
     event.preventDefault();
     const plan = {
       ...formData,
-      days: {
-        sun: days[0],
-        mon: days[1],
-        tue: days[2],
-        wed: days[3],
-        thu: days[4],
-        fri: days[5],
-        sat: days[6],
-      },
       workouts: Array.from(workouts),
     };
     savePlan(plan);
-    setDays(new Array(7).fill(false));
     setWorkouts(new Set());
     setFormData({
       ...formData,
@@ -52,6 +34,22 @@ const NewPlanForm = ({ savePlan }) => {
       ["notes"]: "",
     });
   };
+
+  const handleTagsCheck = () => {};
+
+  const levelElm = levels.map((l) => <option value={l.id}>{l.name}</option>);
+
+  const tagOptions = tags.map((t) => (
+    <label>
+      {t.name}
+      <input
+        type="checkbox"
+        name={t.name}
+        value={t.id}
+        onChange={handleTagsCheck}
+      />
+    </label>
+  ));
 
   return (
     <form method="post" onSubmit={handleSubmit}>
@@ -82,71 +80,13 @@ const NewPlanForm = ({ savePlan }) => {
           onChange={handleChange}
         />
       </label>
-      <h3>Choos the days to do exercise</h3>
-      <div class="checkArea">
-        <label>
-          Sunday:
-          <input
-            type="checkbox"
-            name="sunday"
-            checked={days[0]}
-            onChange={() => handleCheckedChange(0)}
-          />
-        </label>
-        <label>
-          Munday:
-          <input
-            type="checkbox"
-            name="monday"
-            checked={days[1]}
-            onChange={() => handleCheckedChange(1)}
-          />
-        </label>
-        <label>
-          Tuesday:
-          <input
-            type="checkbox"
-            name="tuesday"
-            checked={days[2]}
-            onChange={() => handleCheckedChange(2)}
-          />
-        </label>
-        <label>
-          Wednesday:
-          <input
-            type="checkbox"
-            name="notes"
-            checked={days[3]}
-            onChange={() => handleCheckedChange(3)}
-          />
-        </label>
-        <label>
-          Thursday:
-          <input
-            type="checkbox"
-            name="notes"
-            checked={days[4]}
-            onChange={() => handleCheckedChange(4)}
-          />
-        </label>
-        <label>
-          Friday:
-          <input
-            type="checkbox"
-            name="notes"
-            checked={days[5]}
-            onChange={() => handleCheckedChange(5)}
-          />
-        </label>
-        <label>
-          Saturday:
-          <input
-            type="checkbox"
-            name="notes"
-            checked={days[6]}
-            onChange={() => handleCheckedChange(6)}
-          />
-        </label>
+      <label>
+        Select Level:
+        <select>{levelElm}</select>
+      </label>
+      <div className="box">
+        <h3>Choose tags:</h3>
+        <div className="inline-options">{tagOptions}</div>
       </div>
       <div className="box">
         <h3>Choose the workouts</h3>

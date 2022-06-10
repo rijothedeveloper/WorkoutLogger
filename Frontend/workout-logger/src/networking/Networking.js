@@ -251,6 +251,40 @@ export async function getAllWorkoutEquipments(token) {
   }
 }
 
+export async function getAllLevels(token) {
+  try {
+    const response = await fetch("http://192.168.86.25:3001/workouts/levels", {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        authorization: "bearer " + token,
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function getAllTags(token) {
+  try {
+    const response = await fetch("http://192.168.86.25:3001/workouts/tags", {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        authorization: "bearer " + token,
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return { error };
+  }
+}
+
 export async function addWorkout(token, workout) {
   try {
     const response = await fetch("http://localhost:3000/workouts/addWorkout", {
