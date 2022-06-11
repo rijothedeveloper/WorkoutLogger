@@ -85,26 +85,20 @@ class Workout {
 
   async addPlan(plan) {
     const result = await db.query(
-      "INSERT INTO plans (name, notes, username, sun, mon, tue, wed, thu, fri, sat, imgurl) VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id",
-      [
-        plan.name,
-        plan.notes,
-        plan.username,
-        plan.sun,
-        plan.mon,
-        plan.tue,
-        plan.wed,
-        plan.thu,
-        plan.fri,
-        plan.sun,
-        plan.imgUrl,
-      ]
+      "INSERT INTO plans (name, notes, username, level, imgurl) VALUES ($1,$2, $3, $4, $5) RETURNING id",
+      [plan.name, plan.notes, plan.username, plan.level, plan.imgUrl]
     );
     const planId = result.rows[0].id;
     for (let workoutId of plan.workouts) {
       const result = await db.query(
         "INSERT INTO plan_workouts (planId, workoutid) values ($1, $2)",
         [planId, workoutId]
+      );
+    }
+    for (let tagId of plan.tags) {
+      const result = await db.query(
+        "INSERT INTO plan_tags (plan_id, tag_id) values ($1, $2)",
+        [planId, tagId]
       );
     }
     return true;

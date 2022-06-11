@@ -31,14 +31,9 @@ workoutRouter.post("/plan", ensureLoggedIn, async (req, res, next) => {
     notes: req.body.notes,
     username: req.user.username,
     imgUrl: req.body.imgUrl,
-    sun: req.body.days.sun,
-    mon: req.body.days.mon,
-    tue: req.body.days.tue,
-    wed: req.body.days.wed,
-    thu: req.body.days.thu,
-    fri: req.body.days.fri,
-    sat: req.body.days.sat,
+    level: req.body.level,
     workouts: req.body.workouts,
+    tags: req.body.tags,
   };
   try {
     const result = await workout.addPlan(data);

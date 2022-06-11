@@ -50,7 +50,7 @@ const NewPlan = ({ setFlashMessage }) => {
       });
     }
   };
-  return <NewPlanForm savePlan={savePlan} levels={levels} tags={tags} />;
+  return <NewPlanForm savePlan={savePlan} levels={levels} tag={tags} />;
 };
 
 export default NewPlan;

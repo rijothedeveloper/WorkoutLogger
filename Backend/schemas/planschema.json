@@ -4,80 +4,33 @@
   "type": "object",
   "default": {},
   "title": "Root Schema",
-  "required": ["name", "notes", "days", "workouts"],
+  "required": ["name", "notes", "imgUrl", "level", "workouts", "tags"],
   "properties": {
     "name": {
       "type": "string",
       "default": "",
       "title": "The name Schema",
-      "examples": ["new plan 33"]
+      "examples": ["workout 222"]
     },
     "notes": {
       "type": "string",
       "default": "",
       "title": "The notes Schema",
-      "examples": ["notes are"]
+      "examples": ["none"]
     },
-    "days": {
-      "type": "object",
-      "default": {},
-      "title": "The days Schema",
-      "required": ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
-      "properties": {
-        "sun": {
-          "type": "boolean",
-          "default": false,
-          "title": "The sun Schema",
-          "examples": [false]
-        },
-        "mon": {
-          "type": "boolean",
-          "default": false,
-          "title": "The mon Schema",
-          "examples": [true]
-        },
-        "tue": {
-          "type": "boolean",
-          "default": false,
-          "title": "The tue Schema",
-          "examples": [false]
-        },
-        "wed": {
-          "type": "boolean",
-          "default": false,
-          "title": "The wed Schema",
-          "examples": [true]
-        },
-        "thu": {
-          "type": "boolean",
-          "default": false,
-          "title": "The thu Schema",
-          "examples": [false]
-        },
-        "fri": {
-          "type": "boolean",
-          "default": false,
-          "title": "The fri Schema",
-          "examples": [true]
-        },
-        "sat": {
-          "type": "boolean",
-          "default": false,
-          "title": "The sat Schema",
-          "examples": [false]
-        }
-      },
+    "imgUrl": {
+      "type": "string",
+      "default": "",
+      "title": "The imgUrl Schema",
       "examples": [
-        {
-          "sun": false,
-          "mon": true,
-          "tue": false,
-          "wed": true,
-          "thu": false,
-          "fri": true,
-          "sat": false
-        }
+        "https://images.healthshots.com/healthshots/en/uploads/2021/12/18081913/bhujangasana.jpg"
       ]
+    },
+    "level": {
+      "type": "string",
+      "default": "",
+      "title": "The level Schema",
+      "examples": ["2"]
     },
     "workouts": {
       "type": "array",
@@ -85,26 +38,32 @@
       "title": "The workouts Schema",
       "items": {
         "type": "string",
+        "default": "",
         "title": "A Schema",
-        "examples": ["2", "5", "20"]
+        "examples": ["54"]
       },
-      "examples": [["2", "5", "20"]]
+      "examples": [["54"]]
+    },
+    "tags": {
+      "type": "array",
+      "default": [],
+      "title": "The tags Schema",
+      "items": {
+        "type": "string",
+        "title": "A Schema",
+        "examples": ["2", "4"]
+      },
+      "examples": [["2", "4"]]
     }
   },
   "examples": [
     {
-      "name": "new plan 33",
-      "notes": "notes are",
-      "days": {
-        "sun": false,
-        "mon": true,
-        "tue": false,
-        "wed": true,
-        "thu": false,
-        "fri": true,
-        "sat": false
-      },
-      "workouts": ["2", "5", "20"]
+      "name": "workout 222",
+      "notes": "none",
+      "imgUrl": "https://images.healthshots.com/healthshots/en/uploads/2021/12/18081913/bhujangasana.jpg",
+      "level": "2",
+      "workouts": ["54"],
+      "tags": ["2", "4"]
     }
   ]
 }

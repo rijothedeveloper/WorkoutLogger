@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Workouts from "./Workouts";
 
-const NewPlanForm = ({ savePlan, levels, tags }) => {
+const NewPlanForm = ({ savePlan, levels, tag }) => {
   const [formData, setFormData] = useState({});
   const [workouts, setWorkouts] = useState(new Set());
+  const [tags, setTags] = useState({});
 
   const handleChange = (event) => {
     setFormData({
@@ -25,9 +26,12 @@ const NewPlanForm = ({ savePlan, levels, tags }) => {
     const plan = {
       ...formData,
       workouts: Array.from(workouts),
+      tags: createTagArray(tags),
     };
+    console.log(plan);
     savePlan(plan);
     setWorkouts(new Set());
+    setTags([]);
     setFormData({
       ...formData,
       ["name"]: "",
@@ -35,11 +39,26 @@ const NewPlanForm = ({ savePlan, levels, tags }) => {
     });
   };
 
-  const handleTagsCheck = () => {};
+  const handleTagsCheck = (event) => {
+    setTags({
+      ...tags,
+      [event.target.value]: event.target.checked,
+    });
+  };
+
+  function createTagArray(tags) {
+    const tagArray = [];
+    for (let t in tags) {
+      if (tags[t]) {
+        tagArray.push(t);
+      }
+    }
+    return tagArray;
+  }
 
   const levelElm = levels.map((l) => <option value={l.id}>{l.name}</option>);
 
-  const tagOptions = tags.map((t) => (
+  const tagOptions = tag.map((t) => (
     <label>
       {t.name}
       <input
@@ -82,7 +101,9 @@ const NewPlanForm = ({ savePlan, levels, tags }) => {
       </label>
       <label>
         Select Level:
-        <select>{levelElm}</select>
+        <select value={formData.level} name="level" onChange={handleChange}>
+          {levelElm}
+        </select>
       </label>
       <div className="box">
         <h3>Choose tags:</h3>
