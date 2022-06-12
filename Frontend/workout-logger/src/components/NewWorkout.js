@@ -14,7 +14,7 @@ const NewWorkout = ({ setFlashMessage }) => {
   const [user] = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!user.token) {
+  if (!user || !user.token) {
     navigate("/");
   }
 

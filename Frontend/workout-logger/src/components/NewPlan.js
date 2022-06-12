@@ -10,7 +10,7 @@ const NewPlan = ({ setFlashMessage }) => {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
 
-  if (!user.token) {
+  if (!user || !user.token) {
     navigate("/");
   }
 

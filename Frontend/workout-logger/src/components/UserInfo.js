@@ -8,7 +8,7 @@ const UserInfo = ({ setFlashMessage }) => {
   const [userContext] = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!user.token) {
+  if (!userContext || !userContext.token) {
     navigate("/");
   }
   useEffect(() => {

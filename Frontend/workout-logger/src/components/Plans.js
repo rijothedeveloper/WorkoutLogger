@@ -10,7 +10,7 @@ const Plans = () => {
   const navigate = useNavigate();
 
   // navigate to home if user is not logged in or token expaired
-  if (!user.token) {
+  if (!user || !user.token) {
     navigate("/");
   }
 

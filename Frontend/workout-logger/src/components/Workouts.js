@@ -14,7 +14,7 @@ const Workouts = ({ addable, handleChange }) => {
   const [equipments, setEquipments] = useState([]);
   const navigate = useNavigate();
 
-  if (!user.token) {
+  if (!user || !user.token) {
     navigate("/");
   }
 
