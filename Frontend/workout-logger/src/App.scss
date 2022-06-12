@@ -199,6 +199,12 @@ form {
   height: 200px;
   margin-bottom: 10px;
   position: relative;
+  @media (min-width: 400px) {
+    flex-basis: 45%;
+  }
+  @media screen and (min-width: 900px) {
+    flex-basis: 20%;
+  }
   .iconTop {
     position: absolute;
     top: 0%;
@@ -266,6 +272,56 @@ form {
   font-size: 20px;
 }
 
+.card-raw {
+  display: flex;
+  gap: 4%;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.workout-raw {
+  display: flex;
+  height: 200px;
+  padding: 16px;
+  margin-bottom: 10px;
+  align-items: center;
+  img {
+    height: 100%;
+    margin-left: auto;
+    margin-right: 64px;
+  }
+}
+
+#detailButton {
+  @include detailButton;
+}
+
+.detail-container {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 32px;
+  padding: 32px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px;
+}
+
+.muslegroup {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px;
+  margin-top: 64px;
+}
+
+#addButton {
+  width: 32px;
+  height: 32px;
+}
+
 /* checkbox styles */
 
 .mainCheck {
@@ -329,76 +385,4 @@ form {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
-
-@media (min-width: 400px) {
-  .card-raw {
-    display: flex;
-    gap: 4%;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-  }
-
-  .workout-raw {
-    display: flex;
-    height: 200px;
-    padding: 16px;
-    margin-bottom: 10px;
-    align-items: center;
-    img {
-      height: 100%;
-      margin-left: auto;
-      margin-right: 64px;
-    }
-  }
-
-  #detailButton {
-    @include detailButton;
-  }
-
-  .card {
-    flex-basis: 45%;
-  }
-
-  nav ul {
-    justify-content: center;
-    gap: 2%;
-  }
-
-  .detail-container {
-    display: flex;
-    /* flex-direction: column; */
-    gap: 32px;
-    padding: 32px;
-  }
-  .details {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 32px;
-  }
-
-  .muslegroup {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 32px;
-    margin-top: 64px;
-  }
-
-  #addButton {
-    width: 32px;
-    height: 32px;
-    /* background: url("images//plus64.png") 10px 10px no-repeat; */
-  }
-}
-
-@media (min-width: 900px) {
-  .card {
-    flex-basis: 20%;
-  }
-  nav ul {
-    justify-content: flex-end;
-    gap: 2%;
-  }
 }
