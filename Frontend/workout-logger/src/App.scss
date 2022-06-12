@@ -4,14 +4,15 @@ $black-color: #030202;
 $white-color: #efefef;
 $secondary-color: #e8462d;
 
-@mixin detailButton($hoverCol: #cb1314) {
-  background-color: $secondary-color;
+@mixin detailButton($bgColor: $secondary-color, $hoverCol: #cb1314) {
+  background-color: $bgColor;
   padding: 8px 16px;
   border-radius: 8px;
-  border-color: $secondary-color;
+  border-color: $bgColor;
   color: $white-color;
   &:hover {
     background-color: $hoverCol;
+    border-color: $hoverCol;
   }
 }
 
@@ -196,20 +197,53 @@ form {
 
 .card {
   border: 1px solid grey;
-  height: 200px;
+  width: 100%;
+  height: auto;
   margin-bottom: 10px;
   position: relative;
   @media (min-width: 400px) {
-    flex-basis: 45%;
+    width: 200px;
+    // flex-basis: 45%;
   }
   @media screen and (min-width: 900px) {
-    flex-basis: 20%;
+    width: 300px;
+    // flex-basis: 20%;
   }
-  .iconTop {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    margin: 10px;
+  .thumbnail {
+    img {
+      max-width: 100%;
+    }
+  }
+  .detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .heading {
+    h2,
+    .category,
+    .tags {
+      padding: 8px;
+    }
+    .category {
+      color: #cb1313;
+    }
+    .tags {
+      color: grey;
+    }
+  }
+  .button-raw {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    .detailBtn button {
+      @include detailButton;
+      margin: 8px;
+    }
+    .saveBtn button {
+      @include detailButton(#4caf50);
+      margin: 8px;
+    }
   }
 }
 

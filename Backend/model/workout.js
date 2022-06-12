@@ -121,7 +121,10 @@ class Workout {
   }
 
   async getPlans(planName, username, bookUser) {
-    let query = "SELECT * FROM plans";
+    let query = `SELECT plans.id, plans.name, plans.notes, plans.username, plans.level as levelid, plans.imgurl, plan_levels.name as level
+       FROM plans
+       INNER JOIN plan_levels
+       ON plan_levels.id = plans.level`;
     let filter = false;
     if (planName) {
       query = query + ` WHERE name LIKE '%${planName}%'`;
@@ -144,14 +147,27 @@ class Workout {
     );
     const bookedIdsObj = bookedResult.rows;
     const bookedIds = bookedIdsObj.map((el) => el.planid);
-    const newPlans = plans.map((p) => {
+    const updatedPlans = plans.map((p) => {
       if (bookedIds.includes(p.id)) {
         p["booked"] = true;
       } else {
         p["booked"] = false;
       }
+      return p;
     });
-    return plans;
+    // add tags to the result
+    for (let plan of updatedPlans) {
+      const result = await db.query(
+        `SELECT name 
+        from plan_tags
+        INNER JOIN tags
+        on plan_tags.tag_id = tags.id
+        where plan_id=${plan.id}`
+      );
+      const tags = result.rows.map((t) => t.name);
+      plan["tags"] = tags;
+    }
+    return updatedPlans;
   }
 
   async getBookmarkedPlans(username) {

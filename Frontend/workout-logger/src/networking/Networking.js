@@ -22,8 +22,8 @@ export async function fetchPlans(token, name = null, username = null) {
     });
     const plans = await response.json();
     return plans;
-  } catch (err) {
-    return err;
+  } catch (error) {
+    return { error };
   }
 }
 

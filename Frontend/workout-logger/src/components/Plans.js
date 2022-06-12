@@ -19,8 +19,6 @@ const Plans = () => {
       if (user.token) {
         const plans = await fetchPlans(user.token);
         setPlans(plans);
-      } else {
-        setPlans([]);
       }
     };
     getPlans();
