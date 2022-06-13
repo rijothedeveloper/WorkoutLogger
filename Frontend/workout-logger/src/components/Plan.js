@@ -15,10 +15,12 @@ const Plan = ({ plan }) => {
     console.log("bookmarkClicked");
     if (plan.booked) {
       const result = await removeBookmarkPlan(user.token, plan.id);
-      // bookButton.current.src = bookmarkPlusIcon;
+      bookButton.current.innerText = "Save";
+      plan.booked = !plan.booked;
     } else {
       const result = await bookmarkPlan(user.token, plan.id);
-      // bookButton.current.src = bookmarkRemoveIcon;
+      bookButton.current.innerText = "Remove";
+      plan.booked = !plan.booked;
     }
   };
   const tagElements = plan.tags.map((t) => (
@@ -67,7 +69,7 @@ const Plan = ({ plan }) => {
             <button>Details</button>
           </div>
           <div className="saveBtn" onClick={bookmarkClicked}>
-            <button>Save</button>
+            <button ref={bookButton}>{plan.booked ? "Remove" : "Save"}</button>
           </div>
         </div>
       </div>
