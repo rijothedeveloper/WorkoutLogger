@@ -173,14 +173,33 @@ class Workout {
   async getBookmarkedPlans(username) {
     const result = await db.query(
       `SELECT 
-      plans.id, plans.name, plans.notes, plans.username, plans.sun, plans.mon, plans.tue, plans.wed, plans.thu, plans.fri, plans.sat, plans.imgurl
+      plans.id, plans.name, plans.notes, plans.username, plans.imgurl
       FROM plans
       INNER JOIN saved_plans on plans.id = saved_plans.planid
       WHERE saved_plans.username=$1`,
       [username]
     );
-    const bookPlans = result.rows.map((p) => (p["booked"] = true));
-    return result.rows;
+    const bookPlans = result.rows.map((p) => {
+      p["booked"] = true;
+      return p;
+    });
+    const updatedPlans = bookPlans.map((p) => {
+      p["booked"] = true;
+      return p;
+    });
+    // add tags to the result
+    for (let plan of updatedPlans) {
+      const result = await db.query(
+        `SELECT name 
+        from plan_tags
+        INNER JOIN tags
+        on plan_tags.tag_id = tags.id
+        where plan_id=${plan.id}`
+      );
+      const tags = result.rows.map((t) => t.name);
+      plan["tags"] = tags;
+    }
+    return updatedPlans;
   }
 
   async getPlanWorkouts(planId) {
