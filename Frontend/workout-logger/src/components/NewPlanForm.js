@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Workouts from "./Workouts";
 
 const NewPlanForm = ({ savePlan, levels, tag }) => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ level: "1" });
   const [workouts, setWorkouts] = useState(new Set());
   const [tags, setTags] = useState({});
 
@@ -83,7 +83,7 @@ const NewPlanForm = ({ savePlan, levels, tag }) => {
       </label>
       <label>
         Notes:
-        <input
+        <textarea
           type="text"
           name="notes"
           value={formData.notes}

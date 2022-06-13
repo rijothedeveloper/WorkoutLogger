@@ -3,6 +3,8 @@
 $black-color: #030202;
 $white-color: #efefef;
 $secondary-color: #e8462d;
+// $secondary-color: #00c6fe;
+$subtitleColor: #b3b3b3;
 
 @mixin detailButton($bgColor: $secondary-color, $hoverCol: #cb1314) {
   background-color: $bgColor;
@@ -38,7 +40,7 @@ nav ul {
   justify-content: flex-end;
   gap: 2%;
   @media (min-width: 400px) {
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
   }
   li a {
     display: block;
@@ -95,6 +97,25 @@ nav button {
 }
 
 // hamburger menu style ends
+
+.titleBar {
+  background-color: #1c4245;
+  padding: 32px 0;
+  @media (min-width: 400px) {
+    padding: 64px 0;
+  }
+  .canvas {
+    margin-left: 32px;
+    .subtitle {
+      color: $subtitleColor;
+    }
+  }
+}
+
+.workout-des {
+  width: 100vw;
+  text-align: center;
+}
 
 figure {
   max-width: 100%;

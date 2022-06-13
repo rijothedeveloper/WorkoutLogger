@@ -206,8 +206,8 @@ class Workout {
     const plansresult = await db.query(
       `SELECT * FROM Plans WHERE id=${planId}`
     );
-    const plans = plansresult.rows[0];
-    const result = await db.query(
+    const plan = plansresult.rows[0];
+    let result = await db.query(
       `SELECT * FROM Plan_workouts WHERE planid=${planId}`
     );
     const workoutids = result.rows.map((e) => e.workoutid);
@@ -218,8 +218,17 @@ class Workout {
       );
       workouts.push(result.rows[0]);
     }
-    plans.workouts = workouts;
-    return plans;
+    plan.workouts = workouts;
+    result = await db.query(
+      `SELECT name 
+      from plan_tags
+      INNER JOIN tags
+      on plan_tags.tag_id = tags.id
+      where plan_id=${planId}`
+    );
+    const tags = result.rows.map((t) => t.name);
+    plan["tags"] = tags;
+    return plan;
   }
 
   async addWorkout(workout) {

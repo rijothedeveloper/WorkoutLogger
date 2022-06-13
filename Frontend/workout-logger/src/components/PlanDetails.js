@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchPlan } from "../networking/Networking";
 import UserContext from "../UserContext";
 import PlansInfo from "./PlansInfo";
+import WorkoutList from "./WorkoutList";
 
 const PlanDetails = () => {
   const [user] = useContext(UserContext);
@@ -18,15 +19,35 @@ const PlanDetails = () => {
       }
     };
     fetchPlanDetails();
-  }, []);
+  }, [user.token, planId]);
+
+  let tagElements;
+  let workoutElm;
+  if (plan.tags) {
+    tagElements = plan.tags.map((t) => <span className="tag">{t + ", "}</span>);
+    workoutElm = (
+      <WorkoutList
+        workouts={plan.workouts}
+        addable={false}
+        handleChange={null}
+      />
+    );
+  }
 
   return (
-    <div>
-      <h2>PlanDetails</h2>
-      <h3>name: {plan.name} </h3>
-      <h3>notes: {plan.notes} </h3>
-      <h3>workouts</h3>
-    </div>
+    <>
+      <div className="titleBar">
+        <div className="canvas">
+          <h1>{plan.name}</h1>
+          <h4 className="subtitle">{tagElements}</h4>
+        </div>
+      </div>
+      <div className="workouts-sec">{workoutElm}</div>
+      <div className="workout-des">
+        <h2>{plan.name}</h2>
+        <p>{plan.notes}</p>
+      </div>
+    </>
   );
 };
 
