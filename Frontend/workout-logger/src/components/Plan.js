@@ -66,10 +66,14 @@ const Plan = ({ plan }) => {
         </div>
         <div className="button-raw">
           <div className="detailBtn">
-            <button>Details</button>
+            <Link to={"/plans/" + plan.id}>
+              <button className="cursor">Details</button>
+            </Link>
           </div>
           <div className="saveBtn" onClick={bookmarkClicked}>
-            <button ref={bookButton}>{plan.booked ? "Remove" : "Save"}</button>
+            <button ref={bookButton} className="cursor">
+              {plan.booked ? "Remove" : "Save"}
+            </button>
           </div>
         </div>
       </div>
