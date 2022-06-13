@@ -50,6 +50,51 @@ nav ul {
     }
   }
 }
+// hamburger menu style
+nav {
+  position: relative;
+}
+
+nav button {
+  @media (max-width: 400px) {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+    cursor: pointer;
+  }
+}
+
+.menuNav {
+  @media (max-width: 400px) {
+    overflow-y: scroll;
+    list-style: none;
+    position: fixed;
+    top: 0;
+    background: darkcyan;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 0;
+    overflow: hidden;
+    max-width: 290px;
+    z-index: 9;
+  }
+}
+
+.menuNav.showMenu {
+  @media (max-width: 400px) {
+    width: 100%;
+  }
+}
+
+nav button {
+  @media (min-width: 400px) {
+    display: none;
+  }
+}
+
+// hamburger menu style ends
 
 figure {
   max-width: 100%;
