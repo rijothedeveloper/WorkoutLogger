@@ -34,8 +34,12 @@ nav ul {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-flow: column wrap;
   justify-content: flex-end;
   gap: 2%;
+  @media (min-width: 400px) {
+    flex-flow: row wrap;
+  }
   li a {
     display: block;
     padding: 8px;
