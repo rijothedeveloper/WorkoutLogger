@@ -30,7 +30,6 @@ const Plans = () => {
 
   return (
     <>
-      <h2>Plans</h2>
       <PlansInfo plans={plans} />
     </>
   );

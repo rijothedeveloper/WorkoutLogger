@@ -46,6 +46,7 @@ const PlanDetails = () => {
       <div className="workout-des">
         <h2>{plan.name}</h2>
         <p>{plan.notes}</p>
+        <img src={plan.imgurl} alt={plan.name} />
       </div>
     </>
   );
